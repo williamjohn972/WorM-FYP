@@ -91,6 +91,8 @@ class Generator:
         
         if variant: 
             variant = f" ({variant.name.capitalize()})"
+        else:
+            variant = ""
 
         print(f"[{self.__class__.__name__}{variant}] Generation complete")
         
