@@ -159,17 +159,15 @@ class Trainer():
         self.lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
 
         # Extract progress
-        checkpoint_epoch = int(checkpoint.get("epoch", 0))
-        start_epoch = checkpoint_epoch + 1
+        checkpoint_epoch = int(checkpoint.get("epoch", 1))
+        start_epoch = int(checkpoint_epoch) + 1
 
-        best_epoch = checkpoint.get("best_epoch", 0)
+        best_epoch = checkpoint.get("best_epoch", 1)
         best_val_loss = checkpoint.get("best_val_multitask_loss", float("inf"))
         best_val_acc = checkpoint.get("best_val_multitask_acc", float("-inf"))
 
-        start_epoch = int(checkpoint.get("epoch", 0)) + 1
-
         if hasattr(self, "logger") and self.logger:
-            self.logger.info(f"Loaded Checkpoint from {checkpoint_path} at epoch {start_epoch}")
+            self.logger.info(f"Loaded Checkpoint from {checkpoint_path} at epoch {checkpoint_epoch}")
 
         return checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc
 
