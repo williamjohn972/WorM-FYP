@@ -60,6 +60,7 @@ class Task_Dataset(Dataset):
         else:
             print("Data already exists. Skipping Data Generation")
             print(f"Getting data for {task_name}")
+            print(f"---------------------\n")
 
 
         # Load the Trial JSON

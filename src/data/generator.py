@@ -3,6 +3,8 @@ import json
 from PIL import Image, ImageDraw
 from enum import Enum
 
+import random, numpy as np, torch
+
 class Colors(Enum):
     RED = "#E80909"
     GREEN = "#10C10D"
@@ -97,3 +99,6 @@ class Generator:
         if extras:
             for k, v in extras.items():
                 print(f"  {k}: {v}")
+
+        print(f"---------------------\n")
+        
