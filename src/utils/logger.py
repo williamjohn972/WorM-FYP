@@ -7,15 +7,22 @@ def get_logger(name, log_file_path='./logs/temp.log', logging_level=logging.INFO
     
     logger = logging.getLogger(name)
     logger.setLevel(logging_level)
-    formatter = logging.Formatter(log_format)
+    logger.propagate = False
+
+    if logger.handlers:
+        logger.handlers.clear()
+
+    fmt = logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)d : %(funcName)s() ::\t %(message)s"
+    )
 
     file_handler = logging.FileHandler(log_file_path, mode='a')
     file_handler.setLevel(logging_level)
-    file_handler.setFormatter(formatter)
+    file_handler.setFormatter(fmt)
 
     stream_handler = logging.StreamHandler()
     stream_handler.setLevel(logging_level)
-    stream_handler.setFormatter(formatter)
+    stream_handler.setFormatter(fmt)
 
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
@@ -23,7 +30,20 @@ def get_logger(name, log_file_path='./logs/temp.log', logging_level=logging.INFO
     return logger
 
 def print_log(logger, dict):
-    string = ''
+
+    lines = []
     for key, value in dict.items():
-        string += '\n {}: {}\t'.format(key.replace('_', ' '), value)
-    logger.info(string)
+        
+        # Handle Enums like Tasks/Specs
+        if not isinstance(key, str):
+            key = key.value if hasattr(key, "value") else str(key)
+
+        # Pretty formatting
+        if isinstance(value, float):
+            value_str = f"{value:.4f}"
+        else:
+            value_str = str(value)
+
+        lines.append(f"{key.replace('_', ' '):>18}: {value_str}")
+
+    logger.info("\n" + "\n".join(lines))

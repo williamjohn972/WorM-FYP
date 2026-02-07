@@ -12,9 +12,11 @@ from src.tasks import Tasks
 from src.config import Config
 from src.model import Show_Task
 from src.utils.logger import print_log
+from tqdm.auto import tqdm
 
 from src.utils.train_utils import *
 from src.utils.metrics_utils import *
+from src.utils.viz_utils import viz_results
 
 class Trainer():
 
@@ -320,7 +322,10 @@ class Trainer():
         detailed_acc = defaultdict(lambda: [0,0])
 
         # Loop over multi task batches
-        for step_idx, multitask_batch in enumerate(multitask_iterator):
+        for step_idx, multitask_batch in enumerate(tqdm(
+            multitask_iterator,
+            total = num_steps,
+            leave = False)):
 
             if is_train_mode:
                 # one optimizer step per multitask batch
@@ -539,8 +544,7 @@ class Trainer():
 
         # RUN TEST and GEN_TEST
         test_loaders = {task: self.loaders[task]["test"] for task in self.task_list}
-        gen_test_loaders = {task: self.loaders[task]["gen_test"] for task in self.task_list}
-
+        
         test_multitask_loss, test_task_loss, test_task_acc, test_detailed_acc = self._run_one_epoch(mode= Modes.TEST, loaders=test_loaders)
         assert test_task_acc != None
 
@@ -552,6 +556,13 @@ class Trainer():
                 "task_acc": {str(k): float(v) for k, v in test_task_acc.items()},
             }
         
+        viz_results(
+            epoch=epoch,
+            detailed_acc=test_detailed_acc,
+            config=self.config,
+            task_list=self.task_list
+        )
+        
         if hasattr(self, "logger") and self.logger:
             self.logger.info("=== TEST RESULTS (in-distribution) ===")
             self.logger.info(f"Checkpoint: {checkpoint_path}")
@@ -561,7 +572,8 @@ class Trainer():
             print_log(self.logger, test_task_acc)
 
         if self.config.execution_config.gen_test:
-            gen_test_multitask_loss, gen_test_task_loss, gen_test_task_acc, gen_task_detailed_acc = self._run_one_epoch(mode= Modes.GEN_TEST, loaders=gen_test_loaders)
+            gen_test_loaders = {task: self.loaders[task]["gen_test"] for task in self.task_list}
+            gen_test_multitask_loss, gen_test_task_loss, gen_test_task_acc, gen_test_detailed_acc = self._run_one_epoch(mode= Modes.GEN_TEST, loaders=gen_test_loaders)
             gen_test_avg_acc = calc_acc(gen_test_task_acc)
             assert gen_test_task_acc != None
 
@@ -571,6 +583,13 @@ class Trainer():
                 "task_loss": {str(k): float(v) for k, v in gen_test_task_loss.items()},
                 "task_acc": {str(k): float(v) for k, v in gen_test_task_acc.items()},
             }
+
+            viz_results(
+                epoch=epoch,
+                detailed_acc=gen_test_detailed_acc,
+                config=self.config,
+                task_list=self.task_list
+            )
 
             if hasattr(self, "logger") and self.logger:
                 self.logger.info("=== GEN_TEST RESULTS (generalization) ===")

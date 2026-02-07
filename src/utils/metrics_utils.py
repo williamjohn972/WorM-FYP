@@ -34,7 +34,7 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                 sample_gt = batch["gt"][i, idx].unsqueeze(0)
 
             elif read_type == ReadType.TAIL:
-                k = int(batch[meta["k_from"]][i].item())
+                k = int(batch[meta["k_from"].value][i].item())
                 sample_pred = full_pred[i, seq_len-k : seq_len]
                 sample_gt = batch["gt"][i, seq_len-k : seq_len]
 
@@ -101,7 +101,13 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                             "metadata": {"condition": key.replace("_", " ").title()}
                         })
 
-        metrics["acc"] = epoch_acc_sum / max(1, total_epoch_steps)
+        acc = epoch_acc_sum / max(1, total_epoch_steps)
+
+        if task == Tasks.SPATIAL_FREE_RECALL:
+            acc = acc / 100.0
+
+        metrics["acc"] = acc
+
         if mode in [Modes.TEST, Modes.GEN_TEST]:
             metrics["detailed"] = batch_results  
 
