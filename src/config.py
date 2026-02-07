@@ -75,6 +75,7 @@ class ModelConfig:
 
         # CNN
         self.use_cnn = use_cnn
+        self.final_cnn_output_channels = 512
 
         # memory module
         self.mem_architecture = mem_architecture
