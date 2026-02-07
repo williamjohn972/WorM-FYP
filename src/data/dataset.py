@@ -132,7 +132,7 @@ class Spatial_Integration_Dataset(Task_Dataset):
                  distractor_difference_options=[1], held_out_distractor_difference_options=[1],
                  part_size_options=[3,4,6], held_out_part_size_options=[3,4,6],
                  max_retries=13,
-                 data_dir="debug_test",save=True):
+                 save=True):
         
         data_generator_kwargs = dict(
             num_samples = num_samples,
@@ -142,7 +142,7 @@ class Spatial_Integration_Dataset(Task_Dataset):
             distractor_difference_options = distractor_difference_options, held_out_distractor_difference_options = held_out_distractor_difference_options,
             part_size_options = part_size_options, held_out_part_size_options = held_out_part_size_options,
             max_retries = max_retries,
-            data_dir = data_dir,save = save
+            data_dir = data_path,save = save
         )
 
         super().__init__(data_path = data_path, 
