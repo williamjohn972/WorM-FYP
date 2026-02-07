@@ -1,6 +1,6 @@
 from enum import Enum
 import torch
-from src.general import Tasks
+from src.tasks import Tasks
 from src.model import Show_Task
 
 class Modes(Enum):

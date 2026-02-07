@@ -1,6 +1,6 @@
 import torch
-from train_utils import Modes, LossType, ReadType, Specs, TASK_META_MAP, TASK_VIZ_SPECS, mask_padding
-from src.general import Tasks
+from src.utils.train_utils import Modes, LossType, ReadType, Specs, TASK_META_MAP, TASK_VIZ_SPECS, mask_padding
+from src.tasks import Tasks
 
 
 def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):

@@ -1,7 +1,7 @@
 from src.data.dataset import *
 from torch.utils.data import DataLoader, random_split
 
-from src.general import Tasks
+from src.tasks import Tasks
 
 CHANGE_DETECTION_COMMON_MAP = dict(
     set_size_options=[2, 4, 6, 8, 10, 12], held_out_set_size_options=[2, 4, 6, 8, 10, 12],

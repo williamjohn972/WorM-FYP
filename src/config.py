@@ -1,5 +1,5 @@
-from model import Task_Embedding, Show_Task, Memory_Components, Projections
-from tasks import Tasks
+from src.model import Task_Embedding, Show_Task, Memory_Components, Projections
+from src.tasks import Tasks
 
 class PathConfig:
     def __init__(
@@ -86,7 +86,6 @@ class ModelConfig:
         # projection
         self.projection_type = projection_type
 
-        # ✅ derived value (correct + safe)
         if self.show_task_time == Show_Task.ALL:
             self.projection_size = self.mem_input_size - self.num_tasks
         else:
@@ -98,7 +97,7 @@ class TrainConfig:
         lr=1e-4,
         batch_size=10,
         num_epochs=200,
-        samples_per_task=96000,
+        samples_per_task=1200,
         test_interval=5,
     ):
         self.lr = lr
@@ -112,7 +111,7 @@ class OptimizationConfig:
         self,
         gpu=0,
         seed=86,
-        num_workers=4,
+        num_workers=0,
         use_extracted_feats=False,
     ):
         self.gpu = gpu

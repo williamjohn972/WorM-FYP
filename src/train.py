@@ -4,18 +4,17 @@ from typing import Dict
 import torch
 import torch.nn as nn
 import itertools
-
-from src.general import Tasks, Config
-
+import json
+import os
 from collections import defaultdict
 
+from src.tasks import Tasks
+from src.config import Config
 from src.model import Show_Task
 from src.utils.logger import print_log
-import os
-import json
 
-from utils.train_utils import *
-from utils.metrics_utils import *
+from src.utils.train_utils import *
+from src.utils.metrics_utils import *
 
 class Trainer():
 

@@ -1,7 +1,7 @@
 import torch 
 import torch.nn as nn
 
-from tasks import Tasks, task_id_map
+from src.tasks import Tasks, task_id_map
 
 from enum import Enum
 

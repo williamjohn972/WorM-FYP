@@ -2,7 +2,7 @@ import os
 from matplotlib import pyplot as plt
 from src.tasks import Tasks
 from src.config import Config
-from train_utils import Specs
+from src.utils.train_utils import Specs
 
 serial_position = lambda task, task_data, save_path: plot_serial_position(task=task, task_data=task_data, save_path=save_path)
 integration = lambda task, task_data, save_path: plot_integration(task=task, task_data=task_data, save_path=save_path)
