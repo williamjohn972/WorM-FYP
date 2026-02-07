@@ -302,7 +302,7 @@ class Spatial_Integration_Generator(Generator):
         new_pattern = pattern[:-distractor_diff].copy()
 
         fail_count = 0
-        visited = set(pattern)
+        visited = set(new_pattern)
 
         while len(new_pattern) < pattern_size + 1:
 
