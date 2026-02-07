@@ -82,7 +82,9 @@ class Generator:
     def _log(self, msg, variant=None):
 
         if variant: 
-            variant = f"- {variant}"
+            variant = f" ({variant.name.capitalize()})"
+        else:
+            variant = ""
 
         print(f"[{self.__class__.__name__}]{variant} - {msg}")
 
