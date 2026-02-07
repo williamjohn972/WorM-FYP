@@ -323,7 +323,7 @@ class Spatial_Integration_Generator(Generator):
             if fail_count >= self.max_retries:
                 fail_count = 0
                 new_pattern = pattern[:-distractor_diff].copy()
-                visited = set(pattern)
+                visited = set(new_pattern)
 
 
         return new_pattern
