@@ -315,7 +315,7 @@ class Spatial_Coordination_Dataset(Task_Dataset):
         gt = self.pad_gt(gt, self.gt_pad_token)
 
         if symetry_offset is None:
-            return img_seq, gt, seq_len, None
+            return img_seq, gt, seq_len, torch.tensor(-1)
         
         return img_seq, gt, seq_len, torch.tensor(symetry_offset)
 
@@ -366,7 +366,7 @@ class Visual_Item_Recognition_Dataset(Task_Dataset):
         gt = []
 
         memory_stim_fnames = trial["memory_stim_fnames"]
-        retention_stim_fnames = trial["retenion_stim_fnames"]
+        retention_stim_fnames = trial["retention_stim_fnames"]
         probe_stim_fname = trial["probe_stim_fnames"][0]
         
         label = trial["recall_gt"]
@@ -489,11 +489,11 @@ class Change_Detection_Dataset(Task_Dataset):
             if conj_label_str is None:
                 conj_label = torch.tensor(self.conjunction_none_place_holder)
             else:
-                conj_label = CD_Config.CONJUNCTION_GT_MAP[conj_label_str]
+                conj_label = torch.tensor(CD_Config.CONJUNCTION_GT_MAP[conj_label_str])
 
             return img_seq, gt, seq_len,  retention_interval, set_size, conj_label
 
-        return img_seq, gt, seq_len, retention_interval, set_size, None
+        return img_seq, gt, seq_len, retention_interval, set_size, torch.tensor(-1)
 
 
 class Visual_Serial_Task_Dataset(Task_Dataset):

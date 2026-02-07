@@ -47,7 +47,7 @@ class Config():
     CONJUNCTION_GT_MAP = {
             Variant.COLOR.value: 0,
             Variant.ORIENTATION.value: 1,
-            Variant.SIZE: 2,
+            Variant.SIZE.value: 2,
             Variant.GAP.value: 3,
         }
 
