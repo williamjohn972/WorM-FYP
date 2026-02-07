@@ -4,6 +4,7 @@ import random
 import json
 from PIL import Image,ImageDraw
 from enum import Enum
+from tqdm.auto import tqdm
 
 from src.tasks import Tasks
 
@@ -71,10 +72,12 @@ class Visual_Item_Recognition_Generator(Generator):
 
 
     def generate_trials(self):
+        self._log("Generating trials")        
 
         trials = {"train": [], "test": [], "gen_test": []}
 
         for trial_type in ["train", "test" , "gen_test"]:
+            self._log(f"Split: {trial_type}")
 
             
             # List Length and Retention Interval Options are dependant on Trial Type 
@@ -100,7 +103,7 @@ class Visual_Item_Recognition_Generator(Generator):
             
             # We need to Loop over every single combination
         
-            for list_length in list_length_options:
+            for list_length in tqdm(list_length_options, leave=False, desc=f"{trial_type} | list_length"):
                 for retention_interval in retention_interval_opions:
 
                     combination = (list_length, retention_interval)
@@ -199,6 +202,8 @@ class Visual_Item_Recognition_Generator(Generator):
             self._save_trial_json(trials)
 
         self._draw_trial_stims(trials)
+
+        self._log_summary(trials)
 
         return trials
     

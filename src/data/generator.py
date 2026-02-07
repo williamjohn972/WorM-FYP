@@ -76,3 +76,24 @@ class Generator:
         for stim, fname in zip(stims, fnames):
             stim.save(os.path.join(save_file_path, fname))
 
+
+    def _log(self, msg, variant=None):
+
+        if variant: 
+            variant = f"- {variant}"
+
+        print(f"[{self.__class__.__name__}]{variant} - {msg}")
+
+
+    def _log_summary(self, trials_dict, variant = None, extras=None):
+        
+        if variant: 
+            variant = f" ({variant.name.capitalize()})"
+
+        print(f"[{self.__class__.__name__}{variant}] Generation complete")
+        
+        for k, v in trials_dict.items():
+            print(f"  {k}: {len(v)} samples")
+        if extras:
+            for k, v in extras.items():
+                print(f"  {k}: {v}")

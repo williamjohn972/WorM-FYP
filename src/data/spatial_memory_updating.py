@@ -4,6 +4,7 @@ from typing import List
 import random
 import math
 from copy import deepcopy
+from tqdm.auto import tqdm
 
 from src.tasks import Tasks
 
@@ -86,10 +87,12 @@ class Spatial_Memory_Updating_Generator(Generator):
             self.generate_trials()
     
     def generate_trials(self):
+        self._log("Generating trials")        
         
         trials_dict = {"train": [], "test": [], "gen_test": []}
 
         for trial_type in self.trial_types:
+            self._log(f"Split: {trial_type}")
             
             # set_size_options is dependant on the trial type
             if trial_type in ["train", "test"]:
@@ -107,7 +110,7 @@ class Spatial_Memory_Updating_Generator(Generator):
             cur_trial_samples_per_combination = {}
 
             # Loop over each combination
-            for set_size in set_size_options:
+            for set_size in tqdm(set_size_options, leave=False, desc=f"{trial_type} | set_size"):
                 for presentation_time in self.presentation_time_options:
 
                     combination = (set_size, presentation_time)
@@ -212,6 +215,8 @@ class Spatial_Memory_Updating_Generator(Generator):
             self._save_trial_json(trials_dict)
 
         self._draw_trial_stims(trials_dict)
+
+        self._log_summary(trials_dict)
 
         return trials_dict
 

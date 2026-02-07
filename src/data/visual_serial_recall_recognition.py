@@ -4,6 +4,7 @@ from typing import List, Dict
 import math
 import random
 from PIL import Image, ImageDraw
+from tqdm.auto import tqdm
 
 from src.tasks import Tasks
 
@@ -109,10 +110,12 @@ class Visual_Serial_Task_Generator(Generator):
 
     
     def generate_trials(self):
+        self._log("Generating trials", variant=self.variant)        
 
         trials_dict = {"train": [], "test": [], "gen_test": []}
 
         for trial_type in self.trial_types:
+            self._log(f"Split: {trial_type}", variant=self.variant)
             
             # trial_length_options is dependant on the trial type
             if trial_type in ["train", "test"]:
@@ -132,7 +135,7 @@ class Visual_Serial_Task_Generator(Generator):
             cur_trial_samples_per_combination = {}
 
             # Loop over each combination
-            for list_length in list_length_options:
+            for list_length in tqdm(list_length_options, leave=False, desc=f"{trial_type} | list_length"):
 
                 combination = list_length
                 cur_trial_samples_per_combination[combination] = 0
@@ -248,6 +251,8 @@ class Visual_Serial_Task_Generator(Generator):
             self._save_trial_json(trials_dict)
 
         self._draw_trial_stims(trials_dict)
+
+        self._log_summary(trials_dict)
 
         return trials_dict
     

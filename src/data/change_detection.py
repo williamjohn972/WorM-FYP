@@ -4,6 +4,7 @@ from typing import List, Dict
 from enum import Enum
 import random
 from copy import deepcopy
+from tqdm.auto import tqdm
 
 from src.config import Tasks
 
@@ -87,6 +88,7 @@ class Change_Detection_Generator(Generator):
         self.data_dir = data_dir
         self.save = save
 
+
         # Assertions
         assert self.train_num_samples % len(set_size_options) == 0
         assert self.test_num_samples % len(set_size_options) == 0
@@ -99,10 +101,12 @@ class Change_Detection_Generator(Generator):
             self.generate_trials()
 
     def generate_trials(self):
-        
+
+        self._log("Generating trials", variant=self.variant)        
         trials_dict = {"train": [], "test": [], "gen_test": []}
 
         for trial_type in self.trial_types:
+            self._log(f"Split: {trial_type}", variant=self.variant)
             
             # set_size_options and retention_interval_options are dependant on the trial type
             if trial_type in ["train", "test"]:
@@ -122,7 +126,7 @@ class Change_Detection_Generator(Generator):
             cur_trial_samples_per_combination = {}
 
             # Loop over each combination
-            for set_size in set_size_options:
+            for set_size in tqdm(set_size_options, leave=False, desc=f"{trial_type} | set_size"):
                 for retention_interval in retention_interval_options:
 
                     combination = (set_size, retention_interval)
@@ -325,6 +329,8 @@ class Change_Detection_Generator(Generator):
             self._save_trial_json(trials_dict)
 
         self._draw_trial_stims(trials_dict)
+
+        self._log_summary(trials_dict)
 
         return trials_dict
 

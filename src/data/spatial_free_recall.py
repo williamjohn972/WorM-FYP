@@ -71,10 +71,14 @@ class Spatial_Free_Recall_Generator(Generator):
 
     def generate_trials(self):
 
+        self._log("Generating trials")        
+
         trials_dict = {'train': [], 'test': [], 'gen_test': []}
 
         for trial_type in trials_dict.keys():
             # print(f"Generating {trial_type} trials ...")
+
+            self._log(f"Split: {trial_type}")
 
             # What will the set_size and list_length options be ?
             if trial_type in ["train", "test"]:
@@ -93,7 +97,7 @@ class Spatial_Free_Recall_Generator(Generator):
             overall_sample_count = 0
 
             # Create trials for every combination of set size and list length
-            for set_size in set_size_options:
+            for set_size in tqdm(set_size_options, leave=False, desc=f"{trial_type} | set_size"):
                 for list_length in list_length_options:
                     
                     condition = (set_size, list_length)
@@ -141,6 +145,9 @@ class Spatial_Free_Recall_Generator(Generator):
 
         self._draw_trials_stim(trials_dict)
 
+        self._log_summary(trials_dict)
+
+
         return trials_dict
     
     def _draw_trials_stim(self,trials):
@@ -151,7 +158,7 @@ class Spatial_Free_Recall_Generator(Generator):
         for trial_type in trial_types:
             # print(f"Generating {trial_type} Stimuli")
 
-            for trial in tqdm(trials[trial_type], leave=False):
+            for trial in trials[trial_type]:
 
                 memory_stim_list = self.draw_memory_stim(
                     grid_size=trial["grid_size"],

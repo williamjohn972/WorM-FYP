@@ -3,6 +3,7 @@ from typing import List, Dict
 from enum import Enum
 import random
 from copy import deepcopy
+from tqdm.auto import tqdm
 
 from src.tasks import Tasks
 
@@ -114,10 +115,14 @@ class Spatial_Integration_Generator(Generator):
             self.generate_trials()
 
     def generate_trials(self):
+
+        self._log("Generating trials")        
         
         trials_dict = {"train": [], "test": [], "gen_test": []}
 
         for trial_type in self.trial_types:
+
+            self._log(f"Split: {trial_type}")
             
             # The following variables are dependant on the trial type
             if trial_type in ["train", "test"]:
@@ -141,7 +146,7 @@ class Spatial_Integration_Generator(Generator):
             cur_trial_samples_per_combination = {}
 
             # Loop over each combination
-            for part_size in part_size_options:
+            for part_size in tqdm(part_size_options, leave=False, desc=f"{trial_type} | part_size"):
 
                 combination = part_size
                 cur_trial_samples_per_combination[combination] = 0
@@ -215,6 +220,9 @@ class Spatial_Integration_Generator(Generator):
             self._save_trial_json(trials_dict)
 
         self._draw_trial_stims(trials_dict)
+
+        self._log_summary(trials_dict)
+
 
         return trials_dict
 
