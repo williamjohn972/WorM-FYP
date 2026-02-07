@@ -29,21 +29,26 @@ def get_logger(name, log_file_path='./logs/temp.log', logging_level=logging.INFO
 
     return logger
 
-def print_log(logger, dict):
+def print_log(logger, d: dict, prefix: str = ""):
+    parts = []
 
-    lines = []
-    for key, value in dict.items():
-        
-        # Handle Enums like Tasks/Specs
+    for key, value in d.items():
+        # Handle Enums like Tasks / Specs
         if not isinstance(key, str):
             key = key.value if hasattr(key, "value") else str(key)
 
-        # Pretty formatting
+        key = key.replace("_", " ")
+
         if isinstance(value, float):
             value_str = f"{value:.4f}"
         else:
             value_str = str(value)
 
-        lines.append(f"{key.replace('_', ' '):>18}: {value_str}")
+        parts.append(f"{key}: {value_str}")
 
-    logger.info("\n" + "\n".join(lines))
+    msg = " | ".join(parts)
+
+    if prefix:
+        msg = f"{prefix} | {msg}"
+
+    logger.info(msg)

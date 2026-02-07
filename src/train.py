@@ -169,7 +169,7 @@ class Trainer():
         start_epoch = int(checkpoint.get("epoch", 0)) + 1
 
         if hasattr(self, "logger") and self.logger:
-            self.logger.info(f"Resumed from {checkpoint_path} at epoch {start_epoch}")
+            self.logger.info(f"Loaded Checkpoint from {checkpoint_path} at epoch {start_epoch}")
 
         return checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc
 
@@ -295,7 +295,7 @@ class Trainer():
 
         return loss, metrics
 
-    def _run_one_epoch(self, mode, loaders):
+    def _run_one_epoch(self, mode, loaders, epoch_num=1):
 
         is_train_mode = (mode == Modes.TRAIN)
 
@@ -324,8 +324,8 @@ class Trainer():
         # Loop over multi task batches
         for step_idx, multitask_batch in enumerate(tqdm(
             multitask_iterator,
-            total = num_steps,
-            leave = False)):
+            leave = False,
+            desc=f"{mode.name} | Epoch {epoch_num}")):
 
             if is_train_mode:
                 # one optimizer step per multitask batch
@@ -368,16 +368,23 @@ class Trainer():
                             detailed_acc[key][0] += sample["correct"] # sample["correct"] is a float (0 or 1)
                             detailed_acc[key][1] += 1
                         
-                        if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
-                            # e.g., "CD_Color_Task_RI_6_Set_Size_4"
-                            comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata['retention_interval']}_{Specs.SET_SIZE.value}_{metadata['set_size']}"
-                            detailed_acc[comp_key][0] += sample["correct"]
-                            detailed_acc[comp_key][1] += 1
+                        # if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
+                        #     # e.g., "CD_Color_Task_RI_6_Set_Size_4"
+                        #     comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata['retention_interval']}_{Specs.SET_SIZE.value}_{metadata['set_size']}"
+                        #     detailed_acc[comp_key][0] += sample["correct"]
+                        #     detailed_acc[comp_key][1] += 1
                             
-                        if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
-                            comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata['list_length']}_{Specs.DISTRACTOR_DIFF.value}_{metadata['distractor_diff']}"
-                            detailed_acc[comp_key][0] += sample["correct"]
-                            detailed_acc[comp_key][1] += 1
+                        # if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
+                        #     comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata['list_length']}_{Specs.DISTRACTOR_DIFF.value}_{metadata['distractor_diff']}"
+                        #     detailed_acc[comp_key][0] += sample["correct"]
+                        #     detailed_acc[comp_key][1] += 1
+
+                        parts = [task.value]
+                        for k in sorted(metadata.keys()):
+                            parts += [k, str(metadata[k])]
+                        comp_key = "_".join(parts)
+                        detailed_acc[comp_key][0] += correct
+                        detailed_acc[comp_key][1] += 1
 
             # Backprop + Optimizer step
             if is_train_mode:
@@ -432,14 +439,14 @@ class Trainer():
         for epoch in range(start_epoch, self.config.train_config.num_epochs + 1):
 
             if hasattr(self, "logger") and self.logger:
+                self.logger.info("=" * 60)
                 self.logger.info(f"Epoch {epoch} / {self.config.train_config.num_epochs}")
 
-            
             # Train
-            train_multitask_loss, train_task_loss_dict, _, _ = self._run_one_epoch(mode=Modes.TRAIN, loaders=train_loaders)
+            train_multitask_loss, train_task_loss_dict, _, _ = self._run_one_epoch(mode=Modes.TRAIN, loaders=train_loaders, epoch_num=epoch)
 
             # Val 
-            val_multitask_loss, val_task_loss_dict, val_task_acc_dict, _ = self._run_one_epoch(mode=Modes.VAL, loaders=val_loaders)
+            val_multitask_loss, val_task_loss_dict, val_task_acc_dict, _ = self._run_one_epoch(mode=Modes.VAL, loaders=val_loaders, epoch_num=epoch)
             assert val_task_acc_dict != None
 
             if hasattr(self, "lr_scheduler") and self.lr_scheduler is not None:
@@ -492,17 +499,14 @@ class Trainer():
             if hasattr(self, "logger") and self.logger:
                 self.logger.info(
                     f"Epoch {epoch} | "
-                    f"TrainLoss={train_multitask_loss:.4f} | "
-                    f"ValLoss={val_multitask_loss:.4f} | "
-                    f"ValAcc={avg_val_acc:.4f} | "
-                    f"BestEpoch={best_epoch} BestValAcc={best_val_acc:.4f}"
+                    f"Train Loss: {train_multitask_loss:.4f} | "
+                    f"Val Loss: {val_multitask_loss:.4f} | "
+                    f"Val Acc: {avg_val_acc:.4f} | "
+                    f"Best Epoch: {best_epoch} Best ValAcc: {best_val_acc:.4f}"
                 )
 
-                self.logger.info("-- Per Task Validation Accuracy -- ")
-                print_log(self.logger, val_task_acc_dict)
-                
-                self.logger.info("-- Per Task Validation Loss -- ")
-                print_log(self.logger, val_task_loss_dict)
+                print_log(self.logger, val_task_acc_dict, prefix="Val Acc")
+                print_log(self.logger, val_task_loss_dict, prefix="Val Loss")
 
             # Global metrics
             if hasattr(self, "wandb") and self.wandb is not None:
@@ -545,7 +549,7 @@ class Trainer():
         # RUN TEST and GEN_TEST
         test_loaders = {task: self.loaders[task]["test"] for task in self.task_list}
         
-        test_multitask_loss, test_task_loss, test_task_acc, test_detailed_acc = self._run_one_epoch(mode= Modes.TEST, loaders=test_loaders)
+        test_multitask_loss, test_task_loss, test_task_acc, test_detailed_acc = self._run_one_epoch(mode= Modes.TEST, loaders=test_loaders, epoch_num=epoch)
         assert test_task_acc != None
 
         test_avg_acc = calc_acc(test_task_acc)
@@ -564,16 +568,13 @@ class Trainer():
         )
         
         if hasattr(self, "logger") and self.logger:
-            self.logger.info("=== TEST RESULTS (in-distribution) ===")
-            self.logger.info(f"Checkpoint: {checkpoint_path}")
-            self.logger.info(f"Multitask Loss: {results['test']['multitask_loss']:.4f}")
-            self.logger.info(f"Avg Task Acc:   {results['test']['avg_task_acc']:.4f}")
-            self.logger.info("-- Per Task Acc --")
-            print_log(self.logger, test_task_acc)
+            self.logger.info("=== TEST RESULTS ===")
+            self.logger.info(f"TEST | Multitask Loss: {test_multitask_loss:.4f} | Avg Task Acc: {test_avg_acc:.4f}")
+            print_log(self.logger, test_task_acc, prefix="Test Acc")
 
         if self.config.execution_config.gen_test:
             gen_test_loaders = {task: self.loaders[task]["gen_test"] for task in self.task_list}
-            gen_test_multitask_loss, gen_test_task_loss, gen_test_task_acc, gen_test_detailed_acc = self._run_one_epoch(mode= Modes.GEN_TEST, loaders=gen_test_loaders)
+            gen_test_multitask_loss, gen_test_task_loss, gen_test_task_acc, gen_test_detailed_acc = self._run_one_epoch(mode= Modes.GEN_TEST, loaders=gen_test_loaders, epoch_num=epoch)
             gen_test_avg_acc = calc_acc(gen_test_task_acc)
             assert gen_test_task_acc != None
 
@@ -592,11 +593,9 @@ class Trainer():
             )
 
             if hasattr(self, "logger") and self.logger:
-                self.logger.info("=== GEN_TEST RESULTS (generalization) ===")
-                self.logger.info(f"Multitask Loss: {results['gen_test']['multitask_loss']:.4f}")
-                self.logger.info(f"Avg Task Acc:   {results['gen_test']['avg_task_acc']:.4f}")
-                self.logger.info("-- Per Task Acc --")
-                print_log(self.logger, gen_test_task_acc)
+                self.logger.info("=== GEN_TEST RESULTS ===")
+                self.logger.info(f"TEST | Multitask Loss: {gen_test_multitask_loss:.4f} | Avg Task Acc: {gen_test_avg_acc:.4f}")
+                print_log(self.logger, gen_test_task_acc, prefix="Gen Test Acc")
 
         return results
 
