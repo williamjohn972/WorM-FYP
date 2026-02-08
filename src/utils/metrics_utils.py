@@ -74,19 +74,20 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                         if val is not None:
                             res_metadata[spec_key.value] = val[i].item()
 
-                for step_idx in range(sample_gt.size(0)):
-                    step_metadata = res_metadata.copy()
-                    
-                    if Specs.SERIAL_POSITION in TASK_VIZ_SPECS.get(task, []):
-                        if task == Tasks.VISUAL_ITEM_RECOGNITION:
-                            step_metadata[Specs.SERIAL_POSITION.value] = int(batch["gt_index"][i].item() + 1)
-                        else:
-                            step_metadata[Specs.SERIAL_POSITION.value] = step_idx + 1
-                    
-                    batch_results.append({
-                        "correct": float(sample_pred[step_idx] == sample_gt[step_idx]),
-                        "metadata": step_metadata
-                    })
+                if task != Tasks.SPATIAL_FREE_RECALL:
+                    for step_idx in range(sample_gt.size(0)):
+                        step_metadata = res_metadata.copy()
+                        
+                        if Specs.SERIAL_POSITION in TASK_VIZ_SPECS.get(task, []):
+                            if task == Tasks.VISUAL_ITEM_RECOGNITION:
+                                step_metadata[Specs.SERIAL_POSITION.value] = int(batch["gt_index"][i].item() + 1)
+                            else:
+                                step_metadata[Specs.SERIAL_POSITION.value] = step_idx + 1
+                        
+                        batch_results.append({
+                            "correct": float(sample_pred[step_idx] == sample_gt[step_idx]),
+                            "metadata": step_metadata
+                        })
 
                 # Custom Logic For Spatial Free Recall
                 if task == Tasks.SPATIAL_FREE_RECALL:
