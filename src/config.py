@@ -12,7 +12,7 @@ class PathConfig:
         checkpoint_folder="./checkpoints/",
         output_folder="./output",
     ):
-        self.data_folder = os.path.join(root_folder,data_folder)
+        self.data_folder = data_folder
         self.log_folder = os.path.join(root_folder,log_folder)
         self.checkpoint_folder = os.path.join(root_folder,checkpoint_folder)
         self.output_folder = os.path.join(root_folder,output_folder)

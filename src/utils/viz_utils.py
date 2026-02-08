@@ -362,8 +362,6 @@ def _plot_set_size_vs_retention_interval_interaction(
 ):
     """
     Plot Set Size (x) vs Accuracy (y), one curve per Retention Interval.
-    Works for change detection and VIR-like tasks, as long as keys contain:
-        _retention_interval_<int> and _set_size_<int>
     """
     retention_interval_tag = f"_{Specs.RETENTION_INTERVAL.value}_"
     set_size_tag = f"_{Specs.SET_SIZE.value}_"
@@ -372,31 +370,47 @@ def _plot_set_size_vs_retention_interval_interaction(
     if not retention_intervals:
         return
 
+    # Determine filename
+    if output_filename is None:
+        inferred_task_label = task.value.title() if task is not None else "Task"
+        output_filename = f"{inferred_task_label}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png"
+
+    # (ri, set_size) -> [correct_sum, total_sum]
+    aggregated_counts: Dict[Tuple[int, int], List[float]] = {}
+
+    for key, (num_correct, num_total) in task_data.items():
+        if retention_interval_tag not in key or set_size_tag not in key:
+            continue
+        if num_total <= 0:
+            continue
+
+        ri_value = _extract_int_from_key(key, retention_interval_tag)
+        set_size_value = _extract_int_from_key(key, set_size_tag)
+        if ri_value is None or set_size_value is None:
+            continue
+
+        aggregated_counts.setdefault((ri_value, set_size_value), [0.0, 0.0])
+        aggregated_counts[(ri_value, set_size_value)][0] += num_correct
+        aggregated_counts[(ri_value, set_size_value)][1] += num_total
+
+    if not aggregated_counts:
+        return
+
     plt.figure(figsize=(8, 6))
 
-    for retention_interval in retention_intervals:
+    for ri in retention_intervals:
         set_size_points = []
-        for key, (num_correct, num_total) in task_data.items():
-            if f"{retention_interval_tag}{retention_interval}" not in key:
+        for (ri_value, set_size_value), (correct_sum, total_sum) in aggregated_counts.items():
+            if ri_value != ri or total_sum <= 0:
                 continue
-            if set_size_tag not in key:
-                continue
-            if num_total <= 0:
-                continue
-
-            set_size = _extract_int_from_key(key, set_size_tag)
-            if set_size is None:
-                continue
-
-            accuracy = num_correct / num_total
-            set_size_points.append((set_size, accuracy))
+            set_size_points.append((set_size_value, correct_sum / total_sum))
 
         if not set_size_points:
             continue
 
         set_size_points.sort()
         x_set_sizes, y_accuracies = zip(*set_size_points)
-        plt.plot(x_set_sizes, y_accuracies, marker="s", label=f"Retention Interval: {retention_interval}s")
+        plt.plot(x_set_sizes, y_accuracies, marker="s", label=f"Retention Interval: {ri}s")
 
     plot_title = (task.value.title() if task is not None else "Task") + " Set Size vs Retention Interval"
     plt.title(plot_title)
@@ -407,6 +421,7 @@ def _plot_set_size_vs_retention_interval_interaction(
     plt.tight_layout()
     plt.savefig(os.path.join(save_folder, output_filename))
     plt.close()
+
 
 
 def _plot_vsrec_overall_accuracy_by_distractor(
@@ -506,7 +521,7 @@ def _plot_vsrec_list_length_by_serial_position_collapsed_over_distractor(
     plt.title("VSRec Task Accuracy (List Length x Serial Position)")
     plt.xlabel("Serial Position")
     plt.ylabel("Accuracy")
-    plt.legend(bbox_to_anchor=(1.05, 1), loc="upper_left")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.grid(True, linestyle="--", alpha=0.6)
     plt.tight_layout()
     plt.savefig(os.path.join(save_folder, output_filename))

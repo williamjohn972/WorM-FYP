@@ -61,7 +61,7 @@ class Trainer():
                                                                        mode = "min", 
                                                                        factor = 0.8, 
                                                                        patience = 3, 
-                                                                       verbose = True,
+                                                                    #    verbose = True,
                                                                        threshold = 0.005)
 
         # Create the Loss Criterias 
@@ -138,7 +138,7 @@ class Trainer():
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
         
-        checkpoint = torch.load(checkpoint_path, map_location= self.device)
+        checkpoint = torch.load(checkpoint_path, map_location= self.device, weights_only=False)
         
         # Restore model state 
         if "model_state_dict" not in checkpoint:
@@ -366,16 +366,16 @@ class Trainer():
                             detailed_acc[key][0] += sample["correct"] # sample["correct"] is a float (0 or 1)
                             detailed_acc[key][1] += 1
                         
-                        # if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
-                        #     # e.g., "CD_Color_Task_RI_6_Set_Size_4"
-                        #     comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata['retention_interval']}_{Specs.SET_SIZE.value}_{metadata['set_size']}"
-                        #     detailed_acc[comp_key][0] += sample["correct"]
-                        #     detailed_acc[comp_key][1] += 1
+                        if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
+                            # e.g., "CD_Color_Task_RI_6_Set_Size_4"
+                            comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata['retention_interval']}_{Specs.SET_SIZE.value}_{metadata['set_size']}"
+                            detailed_acc[comp_key][0] += sample["correct"]
+                            detailed_acc[comp_key][1] += 1
                             
-                        # if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
-                        #     comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata['list_length']}_{Specs.DISTRACTOR_DIFF.value}_{metadata['distractor_diff']}"
-                        #     detailed_acc[comp_key][0] += sample["correct"]
-                        #     detailed_acc[comp_key][1] += 1
+                        if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
+                            comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata['list_length']}_{Specs.DISTRACTOR_DIFF.value}_{metadata['distractor_diff']}"
+                            detailed_acc[comp_key][0] += sample["correct"]
+                            detailed_acc[comp_key][1] += 1
 
                         parts = [task.value]
                         for k in sorted(metadata.keys()):
