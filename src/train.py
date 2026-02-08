@@ -319,9 +319,12 @@ class Trainer():
 
         detailed_acc = defaultdict(lambda: [0,0])
 
+        num_batches = min(len(loader) for loader in per_task_loaders)
+
         # Loop over multi task batches
         for step_idx, multitask_batch in enumerate(tqdm(
             multitask_iterator,
+            total=num_batches,
             leave = False,
             desc=f"{mode.name} | Epoch {epoch_num}")):
 
@@ -523,7 +526,21 @@ class Trainer():
 
             # TEST best model in regular intervals
             if epoch % self.config.train_config.test_interval == 0:
-                self.test(epoch=epoch, checkpoint_fname="best.pt")
+                results, test_detailed_acc, gen_test_detailed_acc = self.test(epoch=epoch, checkpoint_fname="best.pt")
+                
+                test_folder = os.path.join(self.config.path_config.output_folder, "test")
+                os.makedirs(test_folder, exist_ok=True)
+
+                with open(os.path.join(test_folder, "best_results.json"), "w") as f:
+                    json.dump(results,f)
+
+                with open(os.path.join(test_folder, "best_test_detailed_acc.json"), "w") as f:
+                    json.dump(test_detailed_acc,f)
+
+                if gen_test_detailed_acc is not None:
+                    with open(os.path.join(test_folder, "best_gen_test_detailed_acc.json"), "w") as f:
+                        json.dump(gen_test_detailed_acc, f)
+
 
         if hasattr(self, "logger") and self.logger:
             self.logger.info(
@@ -558,12 +575,12 @@ class Trainer():
                 "task_acc": {str(k): float(v) for k, v in test_task_acc.items()},
             }
         
-        viz_results(
-            epoch=epoch,
-            detailed_acc=test_detailed_acc,
-            config=self.config,
-            task_list=self.task_list
-        )
+        # viz_results(
+        #     epoch=epoch,
+        #     detailed_acc=test_detailed_acc,
+        #     config=self.config,
+        #     task_list=self.task_list
+        # )
         
         if hasattr(self, "logger") and self.logger:
             self.logger.info("=== TEST RESULTS ===")
@@ -583,12 +600,12 @@ class Trainer():
                 "task_acc": {str(k): float(v) for k, v in gen_test_task_acc.items()},
             }
 
-            viz_results(
-                epoch=epoch,
-                detailed_acc=gen_test_detailed_acc,
-                config=self.config,
-                task_list=self.task_list
-            )
+            # viz_results(
+            #     epoch=epoch,
+            #     detailed_acc=gen_test_detailed_acc,
+            #     config=self.config,
+            #     task_list=self.task_list
+            # )
 
             if hasattr(self, "logger") and self.logger:
                 self.logger.info("=== GEN_TEST RESULTS ===")
