@@ -129,18 +129,9 @@ def compute_sfr_metrics(logits, recall_gt, list_length):
     # Now we perform the no order check
     no_order = torch.equal(torch.sort(pred_idxs)[0], torch.sort(valid_gt)[0])
 
-
-    # We also want to check if the model's top guess matches the first presented item
-    first_item_match = (pred_idxs[0] == valid_gt[0])
-
-    # We also want to see if the models most confident guess was not in the list at all 
-    recall_error = (pred_idxs[0] not in valid_gt)
-
     return {
         "forward_order": forward_order,
         "no_order": no_order,
-        "first_item_match": first_item_match,
-        "recall_error": recall_error,
     }
 
 def calc_acc(task_acc_dict):

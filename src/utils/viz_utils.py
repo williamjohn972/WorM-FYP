@@ -64,8 +64,8 @@ def viz_spatial_coordination(task_data, save_folder):
         task_data=task_data,
         spec=Specs.SET_SIZE,
         save_folder=save_folder,
-        title=f"{task_name.title()}: {Specs.SET_SIZE.value} vs Accuracy",
-        filename=f"{task_name.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        title=f"{task_name}: {Specs.SET_SIZE.value} vs Accuracy",
+        filename=f"{task_name}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
         y_label="Accuracy",
     )
 
@@ -73,8 +73,8 @@ def viz_spatial_coordination(task_data, save_folder):
         task_data=task_data,
         spec=Specs.SYMETRY_OFFSET,
         save_folder=save_folder,
-        title=f"{task_name.title()}: {Specs.SYMETRY_OFFSET.value} vs Accuracy",
-        filename=f"{task_name.title()}_{Specs.SYMETRY_OFFSET.value.title()}_Accuracy.png",
+        title=f"{task_name}: {Specs.SYMETRY_OFFSET.value} vs Accuracy",
+        filename=f"{task_name}_{Specs.SYMETRY_OFFSET.value.title()}_Accuracy.png",
         y_label="Accuracy",
     )
 
@@ -123,19 +123,19 @@ def viz_spatial_integration(task_data, save_folder):
 
     _plot_line(
         points=_dedupe_and_sort_points(integrations_points),
-        title=f"{task_name.title()}: Complexity vs Accuracy",
+        title=f"{task_name}: Complexity vs Accuracy",
         x_label="Number of Integrations",
         y_label="Accuracy",
-        save_path=os.path.join(save_folder, f"{task_name.title()}_Num_Integration_Accuracy.png"),
+        save_path=os.path.join(save_folder, f"{task_name}_Num_Integration_Accuracy.png"),
     )
 
     # Part size vs accuracy
     _plot_line(
         points=_dedupe_and_sort_points(part_size_points),
-        title=f"{task_name.title()}: Part Size Accuracy",
+        title=f"{task_name}: Part Size Accuracy",
         x_label="Part Size",
         y_label="Accuracy",
-        save_path=os.path.join(save_folder, f"{task_name.title()}_{Specs.PART_SIZE.value.title()}_Accuracy.png"),
+        save_path=os.path.join(save_folder, f"{task_name}_{Specs.PART_SIZE.value.title()}_Accuracy.png"),
     )
 
 
@@ -151,7 +151,7 @@ def viz_spatial_memory_updating(task_data, save_folder):
         task_data=task_data,
         primary_spec=Specs.SET_SIZE,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.SET_SIZE.value.title()}_Serial_Position.png",
+        output_filename=f"{task.value}_{Specs.SET_SIZE.value.title()}_Serial_Position.png",
     )
 
     _plot_accuracy_collapsed_over_serial_position(
@@ -159,7 +159,7 @@ def viz_spatial_memory_updating(task_data, save_folder):
         task_data=task_data,
         primary_spec=Specs.SET_SIZE,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        output_filename=f"{task.value}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
     )
 
 
@@ -176,7 +176,7 @@ def viz_visual_item_recognition(task_data, save_folder) -> None:
         task=task,
         task_data=task_data,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        output_filename=f"{task.value}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
     )
 
     _plot_serial_position_by_primary_spec(
@@ -184,7 +184,7 @@ def viz_visual_item_recognition(task_data, save_folder) -> None:
         task_data=task_data,
         primary_spec=Specs.RETENTION_INTERVAL,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.RETENTION_INTERVAL.value.title()}_Serial_Position.png",
+        output_filename=f"{task.value}_{Specs.RETENTION_INTERVAL.value.title()}_Serial_Position.png",
     )
 
     _plot_accuracy_collapsed_over_serial_position(
@@ -192,7 +192,7 @@ def viz_visual_item_recognition(task_data, save_folder) -> None:
         task_data=task_data,
         primary_spec=Specs.RETENTION_INTERVAL,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
+        output_filename=f"{task.value}_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
     )
 
 
@@ -206,7 +206,7 @@ def viz_visual_serial_recall(task_data, save_folder):
         task_data=task_data,
         primary_spec=Specs.LIST_LENGTH,
         save_folder=save_folder,
-        output_filename=f"{task.value.title()}_{Specs.LIST_LENGTH.value.title()}_Serial_Position.png",
+        output_filename=f"{task.value}_{Specs.LIST_LENGTH.value.title()}_Serial_Position.png",
     )
 
 
@@ -236,15 +236,37 @@ def viz_change_detection(task_data, save_folder) -> None:
     """
 
     example_key = next(iter(task_data.keys()))
-    task_name = example_key.split("_")[0] 
+    task_name = example_key.split(f"_{Specs.RETENTION_INTERVAL.value}_")[0] 
 
-    output_file_name = f"{task_name.title()}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png"
+    output_file_name = f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png"
     
+    # (RI x Set Size)
     _plot_set_size_vs_retention_interval_interaction(
         task=None,
         task_data=task_data,
         save_folder=save_folder,
-        output_filename=output_file_name,  
+        output_filename=f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+    )
+
+    # Collapse to marginals and use scalar plots (now it's valid)
+    ri_only, ss_only = _collapse_cd_to_marginals(task_data)
+
+    _plot_scalar_accuracy(
+        task_data=ri_only,
+        spec=Specs.RETENTION_INTERVAL,
+        save_folder=save_folder,
+        title=f"{task_name}: {Specs.RETENTION_INTERVAL.value} vs Accuracy",
+        filename=f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
+        y_label="Accuracy",
+    )
+
+    _plot_scalar_accuracy(
+        task_data=ss_only,
+        spec=Specs.SET_SIZE,
+        save_folder=save_folder,
+        title=f"{task_name}: {Specs.SET_SIZE.value} vs Accuracy",
+        filename=f"{task_name}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        y_label="Accuracy",
     )
 
 
@@ -294,7 +316,7 @@ def _plot_serial_position_by_primary_spec(
         x_positions, y_accuracies = zip(*position_accuracy_points)
         plt.plot(x_positions, y_accuracies, marker="o", label=f"{primary_spec.value}: {primary_value}")
 
-    plt.title(f"{task.value.title()} Serial Position Analysis")
+    plt.title(f"{task.value} Serial Position Analysis")
     plt.xlabel("Serial Position")
     plt.ylabel("Accuracy")
     plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
@@ -344,7 +366,7 @@ def _plot_accuracy_collapsed_over_serial_position(
 
     plt.figure(figsize=(8, 6))
     plt.plot(primary_values_sorted, mean_accuracies, marker="o")
-    plt.title(f"{task.value.title()} {primary_spec.value.title()} Accuracy (collapsed over Serial Position)")
+    plt.title(f"{task.value} {primary_spec.value.title()} Accuracy (collapsed over Serial Position)")
     plt.xlabel(primary_spec.value.title())
     plt.ylabel("Accuracy")
     plt.xticks(primary_values_sorted)
@@ -369,11 +391,6 @@ def _plot_set_size_vs_retention_interval_interaction(
     retention_intervals = _sorted_unique_ints_from_keys(task_data.keys(), retention_interval_tag)
     if not retention_intervals:
         return
-
-    # Determine filename
-    if output_filename is None:
-        inferred_task_label = task.value.title() if task is not None else "Task"
-        output_filename = f"{inferred_task_label}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png"
 
     # (ri, set_size) -> [correct_sum, total_sum]
     aggregated_counts: Dict[Tuple[int, int], List[float]] = {}
@@ -412,7 +429,7 @@ def _plot_set_size_vs_retention_interval_interaction(
         x_set_sizes, y_accuracies = zip(*set_size_points)
         plt.plot(x_set_sizes, y_accuracies, marker="s", label=f"Retention Interval: {ri}s")
 
-    plot_title = (task.value.title() if task is not None else "Task") + " Set Size vs Retention Interval"
+    plot_title = (task.value if task is not None else "Task") + " Set Size vs Retention Interval"
     plt.title(plot_title)
     plt.xlabel("Set Size")
     plt.ylabel("Accuracy")
@@ -421,7 +438,6 @@ def _plot_set_size_vs_retention_interval_interaction(
     plt.tight_layout()
     plt.savefig(os.path.join(save_folder, output_filename))
     plt.close()
-
 
 
 def _plot_vsrec_overall_accuracy_by_distractor(
@@ -538,7 +554,7 @@ def _plot_free_recall_strategy_bars(
     Categorical bar plot for Spatial Free Recall strategy conditions.
     """
     task_prefix = f"{task.value}_"
-    allowed_conditions = ["Forward Order", "No Order", "Recall Error", "First Item Match"]
+    allowed_conditions = ["Forward Order", "No Order"]
 
     category_labels = []
     category_accuracies = []
@@ -653,6 +669,78 @@ def _plot_line(
     plt.savefig(save_path)
     plt.close()
 
+def _aggregate_cd_interaction_counts(task_data):
+    retention_interval_tag = f"_{Specs.RETENTION_INTERVAL.value}_"
+    set_size_tag = f"_{Specs.SET_SIZE.value}_"
+
+    aggregated_counts = {}  # (ri, set_size) -> [correct_sum, total_sum]
+
+    for key, (num_correct, num_total) in task_data.items():
+        if retention_interval_tag not in key or set_size_tag not in key:
+            continue
+        if num_total <= 0:
+            continue
+
+        ri = _extract_int_from_key(key, retention_interval_tag)
+        ss = _extract_int_from_key(key, set_size_tag)
+        if ri is None or ss is None:
+            continue
+
+        aggregated_counts.setdefault((ri, ss), [0.0, 0.0])
+        aggregated_counts[(ri, ss)][0] += float(num_correct)
+        aggregated_counts[(ri, ss)][1] += float(num_total)
+
+    return aggregated_counts
+
+def _collapse_cd_to_ri_only(aggregated_counts):
+    ri_only = {}  # ri -> [correct,total]
+    for (ri, ss), (c, t) in aggregated_counts.items():
+        if t <= 0:
+            continue
+        ri_only.setdefault(ri, [0.0, 0.0])
+        ri_only[ri][0] += c
+        ri_only[ri][1] += t
+    return ri_only
+
+def _collapse_cd_to_set_size_only(aggregated_counts):
+    ss_only = {}  # set_size -> [correct,total]
+    for (ri, ss), (c, t) in aggregated_counts.items():
+        if t <= 0:
+            continue
+        ss_only.setdefault(ss, [0.0, 0.0])
+        ss_only[ss][0] += c
+        ss_only[ss][1] += t
+    return ss_only
+
+def _collapse_cd_to_marginals(task_data):
+    """
+    Convert interaction keys (..._retention_interval_<ri>_set_size_<ss>)
+    into two marginal dicts shaped for _plot_scalar_accuracy:
+
+      ri_only:  { "<base>_retention_interval_<ri>": (correct_sum, total_sum), ... }
+      ss_only:  { "<base>_set_size_<ss>": (correct_sum, total_sum), ... }
+    """
+    if not task_data:
+        return {}, {}
+
+    example_key = next(iter(task_data.keys()))
+    base = example_key.split(f"_{Specs.RETENTION_INTERVAL.value}_")[0]
+
+    aggregated_counts = _aggregate_cd_interaction_counts(task_data)
+
+    ri_map = _collapse_cd_to_ri_only(aggregated_counts)          # ri -> [c,t]
+    ss_map = _collapse_cd_to_set_size_only(aggregated_counts)    # ss -> [c,t]
+
+    ri_only = {
+        f"{base}_{Specs.RETENTION_INTERVAL.value}_{ri}": (vals[0], vals[1])
+        for ri, vals in ri_map.items()
+    }
+    ss_only = {
+        f"{base}_{Specs.SET_SIZE.value}_{ss}": (vals[0], vals[1])
+        for ss, vals in ss_map.items()
+    }
+
+    return ri_only, ss_only
 
 def _extract_int_from_key(key, tag):
     # key = "..._list_length_6_serial_position_2..."
