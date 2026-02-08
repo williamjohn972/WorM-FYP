@@ -368,12 +368,12 @@ class Trainer():
                         
                         if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
                             # e.g., "CD_Color_Task_RI_6_Set_Size_4"
-                            comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata['retention_interval']}_{Specs.SET_SIZE.value}_{metadata['set_size']}"
+                            comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata[Specs.RETENTION_INTERVAL.value]}_{Specs.SET_SIZE.value}_{metadata[Specs.SET_SIZE.value]}"
                             detailed_acc[comp_key][0] += sample["correct"]
                             detailed_acc[comp_key][1] += 1
                             
                         if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
-                            comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata['list_length']}_{Specs.DISTRACTOR_DIFF.value}_{metadata['distractor_diff']}"
+                            comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata[Specs.LIST_LENGTH.value]}_{Specs.DISTRACTOR_DIFF.value}_{metadata[Specs.DISTRACTOR_DIFF.value]}"
                             detailed_acc[comp_key][0] += sample["correct"]
                             detailed_acc[comp_key][1] += 1
 

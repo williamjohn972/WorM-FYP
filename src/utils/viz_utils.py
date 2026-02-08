@@ -90,14 +90,14 @@ def viz_spatial_free_recall(task_data, save_folder):
         task_data=task_data,
         primary_spec=Specs.LIST_LENGTH,
         save_folder=save_folder,
-        output_filename=f"{Tasks.SPATIAL_FREE_RECALL.value.title()}_{Specs.LIST_LENGTH.value.title()}_Serial_Position.png",
+        output_filename=f"{Tasks.SPATIAL_FREE_RECALL.value}_{Specs.LIST_LENGTH.value.title()}_Serial_Position.png",
     )
 
     _plot_free_recall_strategy_bars(
         task=Tasks.SPATIAL_FREE_RECALL,
         task_data=task_data,
         save_folder=save_folder,
-        output_filename=f"{Tasks.SPATIAL_FREE_RECALL.value.title()}_Strategy_Comparison.png",
+        output_filename=f"{Tasks.SPATIAL_FREE_RECALL.value}_Strategy_Comparison.png",
     )
 
 
@@ -253,8 +253,8 @@ def viz_change_detection(task_data, save_folder) -> None:
         task_data=ri_only,
         spec=Specs.RETENTION_INTERVAL,
         save_folder=save_folder,
-        title=f"{task_name}: {Specs.RETENTION_INTERVAL.value} vs Accuracy",
-        filename=f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
+        title=f"{task_name}_Task: {Specs.RETENTION_INTERVAL.value} vs Accuracy",
+        filename=f"{task_name}_Task_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
         y_label="Accuracy",
     )
 
@@ -262,8 +262,8 @@ def viz_change_detection(task_data, save_folder) -> None:
         task_data=ss_only,
         spec=Specs.SET_SIZE,
         save_folder=save_folder,
-        title=f"{task_name}: {Specs.SET_SIZE.value} vs Accuracy",
-        filename=f"{task_name}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        title=f"{task_name}_Task: {Specs.SET_SIZE.value} vs Accuracy",
+        filename=f"{task_name}_Task_{Specs.SET_SIZE.value.title()}_Accuracy.png",
         y_label="Accuracy",
     )
 
@@ -558,7 +558,7 @@ def _plot_free_recall_strategy_bars(
     category_accuracies = []
 
     for key, (num_correct, num_total) in task_data.items():
-        label = key.replace(task_prefix, "")
+        label = key.replace(task_prefix, "").strip("_")
         if label not in allowed_conditions:
             continue
         if num_total <= 0:
