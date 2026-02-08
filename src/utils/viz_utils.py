@@ -236,16 +236,14 @@ def viz_change_detection(task_data, save_folder) -> None:
     """
 
     example_key = next(iter(task_data.keys()))
-    task_name = example_key.split(f"_{Specs.RETENTION_INTERVAL.value}_")[0] 
-
-    output_file_name = f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png"
+    task_name = example_key.split("_Task_")[0] 
     
     # (RI x Set Size)
     _plot_set_size_vs_retention_interval_interaction(
         task=None,
         task_data=task_data,
         save_folder=save_folder,
-        output_filename=f"{task_name}_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
+        output_filename=f"{task_name}_Task_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
     )
 
     # Collapse to marginals and use scalar plots (now it's valid)

@@ -99,7 +99,7 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                     for key, correct in sfr_res.items():
                         batch_results.append({
                             "correct": float(correct),
-                            "metadata": {"condition": key.replace("_", " ").title()}
+                            "metadata": {"condition": key.title()}
                         })
 
         acc = epoch_acc_sum / max(1, total_epoch_steps)
@@ -130,8 +130,8 @@ def compute_sfr_metrics(logits, recall_gt, list_length):
     no_order = torch.equal(torch.sort(pred_idxs)[0], torch.sort(valid_gt)[0])
 
     return {
-        "forward_order": forward_order,
-        "no_order": no_order,
+        "Forward Order": forward_order,
+        "No Order": no_order,
     }
 
 def calc_acc(task_acc_dict):
