@@ -246,27 +246,6 @@ def viz_change_detection(task_data, save_folder) -> None:
         output_filename=f"{task_name}_Task_{Specs.RETENTION_INTERVAL.value.title()}_{Specs.SET_SIZE.value.title()}_Accuracy.png",
     )
 
-    # Collapse to marginals and use scalar plots (now it's valid)
-    ri_only, ss_only = _collapse_cd_to_marginals(task_data)
-
-    _plot_scalar_accuracy(
-        task_data=ri_only,
-        spec=Specs.RETENTION_INTERVAL,
-        save_folder=save_folder,
-        title=f"{task_name}_Task: {Specs.RETENTION_INTERVAL.value} vs Accuracy",
-        filename=f"{task_name}_Task_{Specs.RETENTION_INTERVAL.value.title()}_Accuracy.png",
-        y_label="Accuracy",
-    )
-
-    _plot_scalar_accuracy(
-        task_data=ss_only,
-        spec=Specs.SET_SIZE,
-        save_folder=save_folder,
-        title=f"{task_name}_Task: {Specs.SET_SIZE.value} vs Accuracy",
-        filename=f"{task_name}_Task_{Specs.SET_SIZE.value.title()}_Accuracy.png",
-        y_label="Accuracy",
-    )
-
 
 def _plot_serial_position_by_primary_spec(
     task: Tasks,
@@ -667,78 +646,6 @@ def _plot_line(
     plt.savefig(save_path)
     plt.close()
 
-def _aggregate_cd_interaction_counts(task_data):
-    retention_interval_tag = f"_{Specs.RETENTION_INTERVAL.value}_"
-    set_size_tag = f"_{Specs.SET_SIZE.value}_"
-
-    aggregated_counts = {}  # (ri, set_size) -> [correct_sum, total_sum]
-
-    for key, (num_correct, num_total) in task_data.items():
-        if retention_interval_tag not in key or set_size_tag not in key:
-            continue
-        if num_total <= 0:
-            continue
-
-        ri = _extract_int_from_key(key, retention_interval_tag)
-        ss = _extract_int_from_key(key, set_size_tag)
-        if ri is None or ss is None:
-            continue
-
-        aggregated_counts.setdefault((ri, ss), [0.0, 0.0])
-        aggregated_counts[(ri, ss)][0] += float(num_correct)
-        aggregated_counts[(ri, ss)][1] += float(num_total)
-
-    return aggregated_counts
-
-def _collapse_cd_to_ri_only(aggregated_counts):
-    ri_only = {}  # ri -> [correct,total]
-    for (ri, ss), (c, t) in aggregated_counts.items():
-        if t <= 0:
-            continue
-        ri_only.setdefault(ri, [0.0, 0.0])
-        ri_only[ri][0] += c
-        ri_only[ri][1] += t
-    return ri_only
-
-def _collapse_cd_to_set_size_only(aggregated_counts):
-    ss_only = {}  # set_size -> [correct,total]
-    for (ri, ss), (c, t) in aggregated_counts.items():
-        if t <= 0:
-            continue
-        ss_only.setdefault(ss, [0.0, 0.0])
-        ss_only[ss][0] += c
-        ss_only[ss][1] += t
-    return ss_only
-
-def _collapse_cd_to_marginals(task_data):
-    """
-    Convert interaction keys (..._retention_interval_<ri>_set_size_<ss>)
-    into two marginal dicts shaped for _plot_scalar_accuracy:
-
-      ri_only:  { "<base>_retention_interval_<ri>": (correct_sum, total_sum), ... }
-      ss_only:  { "<base>_set_size_<ss>": (correct_sum, total_sum), ... }
-    """
-    if not task_data:
-        return {}, {}
-
-    example_key = next(iter(task_data.keys()))
-    base = example_key.split(f"_{Specs.RETENTION_INTERVAL.value}_")[0]
-
-    aggregated_counts = _aggregate_cd_interaction_counts(task_data)
-
-    ri_map = _collapse_cd_to_ri_only(aggregated_counts)          # ri -> [c,t]
-    ss_map = _collapse_cd_to_set_size_only(aggregated_counts)    # ss -> [c,t]
-
-    ri_only = {
-        f"{base}_{Specs.RETENTION_INTERVAL.value}_{ri}": (vals[0], vals[1])
-        for ri, vals in ri_map.items()
-    }
-    ss_only = {
-        f"{base}_{Specs.SET_SIZE.value}_{ss}": (vals[0], vals[1])
-        for ss, vals in ss_map.items()
-    }
-
-    return ri_only, ss_only
 
 def _extract_int_from_key(key, tag):
     # key = "..._list_length_6_serial_position_2..."

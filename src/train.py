@@ -366,16 +366,16 @@ class Trainer():
                             detailed_acc[key][0] += sample["correct"] # sample["correct"] is a float (0 or 1)
                             detailed_acc[key][1] += 1
                         
-                        if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
-                            # e.g., "CD_Color_Task_RI_6_Set_Size_4"
-                            comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata[Specs.RETENTION_INTERVAL.value]}_{Specs.SET_SIZE.value}_{metadata[Specs.SET_SIZE.value]}"
-                            detailed_acc[comp_key][0] += sample["correct"]
-                            detailed_acc[comp_key][1] += 1
+                        # if Specs.SET_SIZE.value in metadata and Specs.RETENTION_INTERVAL.value in metadata:
+                        #     # e.g., "CD_Color_Task_RI_6_Set_Size_4"
+                        #     comp_key = f"{task.value}_{Specs.RETENTION_INTERVAL.value}_{metadata[Specs.RETENTION_INTERVAL.value]}_{Specs.SET_SIZE.value}_{metadata[Specs.SET_SIZE.value]}"
+                        #     detailed_acc[comp_key][0] += sample["correct"]
+                        #     detailed_acc[comp_key][1] += 1
                             
-                        if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
-                            comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata[Specs.LIST_LENGTH.value]}_{Specs.DISTRACTOR_DIFF.value}_{metadata[Specs.DISTRACTOR_DIFF.value]}"
-                            detailed_acc[comp_key][0] += sample["correct"]
-                            detailed_acc[comp_key][1] += 1
+                        # if Specs.LIST_LENGTH.value in metadata and Specs.DISTRACTOR_DIFF.value in metadata:
+                        #     comp_key = f"{task.value}_{Specs.LIST_LENGTH.value}_{metadata[Specs.LIST_LENGTH.value]}_{Specs.DISTRACTOR_DIFF.value}_{metadata[Specs.DISTRACTOR_DIFF.value]}"
+                        #     detailed_acc[comp_key][0] += sample["correct"]
+                        #     detailed_acc[comp_key][1] += 1
 
                         parts = [task.value]
                         for k in sorted(metadata.keys()):
@@ -481,7 +481,7 @@ class Trainer():
             # Save Checkpoints
             self._save_checkpoint(cur_payload, f"curr_epoch.pt")
 
-            # Save checkpoints every (10 epochs)
+            # Save checkpoints every {interval} epochs
             if epoch % self.config.train_config.test_interval == 0:
                 self._save_checkpoint(cur_payload, f"epoch_{str(epoch).zfill(3)}.pt")
                             
@@ -595,7 +595,9 @@ class Trainer():
                 self.logger.info(f"TEST | Multitask Loss: {gen_test_multitask_loss:.4f} | Avg Task Acc: {gen_test_avg_acc:.4f}")
                 print_log(self.logger, gen_test_task_acc, prefix="Gen Test Acc")
 
-        return results
+            return results, test_detailed_acc, gen_test_detailed_acc
+
+        return results, test_detailed_acc, None
 
 
 

@@ -97,9 +97,19 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                         list_length=seq_len - 1
                     )
                     for key, correct in sfr_res.items():
+                        if key in ["Forward Order", "No Order"]:
+                            batch_results.append({
+                                "correct": float(correct),
+                                "metadata": {"condition": key.title()}
+                            })
+
+                    for pos, correct in enumerate(sfr_res[Specs.SERIAL_POSITION.value], start=1):
                         batch_results.append({
                             "correct": float(correct),
-                            "metadata": {"condition": key.title()}
+                            "metadata": {
+                                Specs.LIST_LENGTH.value: seq_len - 1,
+                                Specs.SERIAL_POSITION.value: pos,
+                            }
                         })
 
         acc = epoch_acc_sum / max(1, total_epoch_steps)
@@ -129,10 +139,16 @@ def compute_sfr_metrics(logits, recall_gt, list_length):
     # Now we perform the no order check
     no_order = torch.equal(torch.sort(pred_idxs)[0], torch.sort(valid_gt)[0])
 
-    return {
+    output =  {
         "Forward Order": forward_order,
         "No Order": no_order,
+        Specs.SERIAL_POSITION.value: []
     }
+
+    for j in range(list_length):
+        output[Specs.SERIAL_POSITION.value].append(bool(pred_idxs[j].item() == valid_gt[j].item()))
+
+    return output
 
 def calc_acc(task_acc_dict):
     avg_acc = sum(task_acc_dict.values()) / max(1, len(task_acc_dict))
