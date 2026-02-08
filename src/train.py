@@ -117,9 +117,9 @@ class Trainer():
     def _save_checkpoint(self, payload, filename):
 
         # Ensure the directory exists
-        os.makedirs(self.config.path_config.model_folder, exist_ok=True)
+        os.makedirs(self.config.path_config.checkpoint_folder, exist_ok=True)
 
-        save_path = os.path.join(self.config.path_config.model_folder, filename)
+        save_path = os.path.join(self.config.path_config.checkpoint_folder, filename)
 
         # torch.save handles tensors, dicts, optimizer states, etc.
         torch.save(payload, save_path)
@@ -133,7 +133,7 @@ class Trainer():
     def load_checkpoint(self, checkpoint_path = None):
 
         if checkpoint_path is None:
-            checkpoint_path = os.path.join(self.config.path_config.model_folder, "model_curr_epoch.pt")
+            checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, "curr_epoch.pt")
 
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
@@ -479,18 +479,18 @@ class Trainer():
                 )
             
             # Save Checkpoints
-            self._save_checkpoint(cur_payload, f"model_curr_epoch.pt")
+            self._save_checkpoint(cur_payload, f"curr_epoch.pt")
 
             # Save checkpoints every (10 epochs)
             if epoch % self.config.train_config.test_interval == 0:
-                self._save_checkpoint(cur_payload, f"model_epoch_{str(epoch).zfill(3)}.pt")
+                self._save_checkpoint(cur_payload, f"epoch_{str(epoch).zfill(3)}.pt")
                             
             
             # Save best model 
             if is_best:
                 best_payload = dict(cur_payload)
                 best_payload["save_condition"] = "best_val_acc"
-                self._save_checkpoint(best_payload, "model_best.pt")
+                self._save_checkpoint(best_payload, "best.pt")
 
 
             # Log
@@ -521,9 +521,9 @@ class Trainer():
                     self.wandb.log({"epoch": epoch, f"val/{task}_acc": val_task_acc_dict[task]})
 
 
-            # TEST in regular intervals
+            # TEST best model in regular intervals
             if epoch % self.config.train_config.test_interval == 0:
-                self.test(epoch=epoch, checkpoint_fname="model_best.pt")
+                self.test(epoch=epoch, checkpoint_fname="best.pt")
 
         if hasattr(self, "logger") and self.logger:
             self.logger.info(
@@ -532,8 +532,8 @@ class Trainer():
 
     def test(self, epoch, checkpoint_fname):
 
-        # Loads the best checkpoint
-        checkpoint_path = os.path.join(self.config.path_config.model_folder, checkpoint_fname)
+        # Loads the checkpoint
+        checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, checkpoint_fname)
         self.load_checkpoint(checkpoint_path)
 
         results = {

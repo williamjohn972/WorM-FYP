@@ -1,18 +1,21 @@
 from src.model import Task_Embedding, Show_Task, Memory_Components, Projections
 from src.tasks import Tasks
 
+import os
+
 class PathConfig:
     def __init__(
         self,
+        root_folder,
         data_folder="./wm_bench_data",
         log_folder="./log/",
-        model_folder="./model/",
+        checkpoint_folder="./checkpoints/",
         output_folder="./output",
     ):
-        self.data_folder = data_folder
-        self.log_folder = log_folder
-        self.model_folder = model_folder
-        self.output_folder = output_folder
+        self.data_folder = os.path.join(root_folder,data_folder)
+        self.log_folder = os.path.join(root_folder,log_folder)
+        self.checkpoint_folder = os.path.join(root_folder,checkpoint_folder)
+        self.output_folder = os.path.join(root_folder,output_folder)
 
 class ExecutionConfig:
     def __init__(
@@ -146,6 +149,7 @@ class Config:
     def __init__(
         self,
         *,
+        root_folder,
         mem_architecture=Memory_Components.GRU,
         gpu=0,
         seed=86,
@@ -155,7 +159,7 @@ class Config:
         num_tasks = len(self.task_config.task_list)
 
         # core configs
-        self.path_config = PathConfig()
+        self.path_config = PathConfig(root_folder=root_folder)
         self.execution_config = ExecutionConfig(num_tasks=num_tasks)
         self.resumption_config = ResumptionConfig()
         self.train_config = TrainConfig()
@@ -166,4 +170,5 @@ class Config:
             num_tasks=num_tasks,
             mem_architecture=mem_architecture,
         )
+
 
