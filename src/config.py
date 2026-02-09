@@ -7,15 +7,19 @@ class PathConfig:
     def __init__(
         self,
         root_folder,
+        run_name,
         data_folder="./wm_bench_data",
         log_folder="./log/",
         checkpoint_folder="./checkpoints/",
         output_folder="./output",
     ):
-        self.data_folder = data_folder
-        self.log_folder = os.path.join(root_folder,log_folder)
-        self.checkpoint_folder = os.path.join(root_folder,checkpoint_folder)
-        self.output_folder = os.path.join(root_folder,output_folder)
+        
+        run_folder = os.path.join(root_folder, run_name)
+
+        self.data_folder = os.path.join(root_folder,data_folder)
+        self.log_folder = os.path.join(run_folder,log_folder)
+        self.checkpoint_folder = os.path.join(run_folder,checkpoint_folder)
+        self.output_folder = os.path.join(run_folder,output_folder)
 
 class ExecutionConfig:
     def __init__(
@@ -150,6 +154,7 @@ class Config:
         self,
         *,
         root_folder,
+        run_name,
         mem_architecture=Memory_Components.GRU,
         gpu=0,
         seed=86,
@@ -159,7 +164,7 @@ class Config:
         num_tasks = len(self.task_config.task_list)
 
         # core configs
-        self.path_config = PathConfig(root_folder=root_folder)
+        self.path_config = PathConfig(root_folder=root_folder, run_name=run_name)
         self.execution_config = ExecutionConfig(num_tasks=num_tasks)
         self.resumption_config = ResumptionConfig()
         self.train_config = TrainConfig()
