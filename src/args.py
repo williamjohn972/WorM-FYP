@@ -16,7 +16,7 @@ def build_parser():
 
     # Resumption Config
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--resume_epoch", type=int, default=0)
+    parser.add_argument("--resume_epoch", type=int, default=None)
 
     # Model Config
     parser.add_argument("--img_size", type=int, default=96)
@@ -24,7 +24,8 @@ def build_parser():
     parser.add_argument("--num_input_channels", type=int, default=3)
     parser.add_argument("--max_seq_len", type=int, default=20)
 
-    parser.add_argument("--use_cnn", action="store_true")
+    parser.add_argument("--no_cnn", action="store_false", dest="use_cnn")
+    parser.set_defaults(use_cnn = True)
 
     parser.add_argument("--mem_architecture", type=str, default="GRU")
     parser.add_argument("--mem_input_size", type=int, default=512)

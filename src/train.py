@@ -434,7 +434,10 @@ class Trainer():
 
         # Resume from previous checkpoint if needed
         if getattr(self.config.resumption_config, "resume", False):
-            checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc = self.load_checkpoint()
+            if self.config.resumption_config.resume_epoch is not None:
+                checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc = self.load_checkpoint(f"epoch_{str(self.config.resumption_config.resume_epoch).zfill(3)}.pt")
+            else:
+                checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc = self.load_checkpoint()
 
         # Epoch Loop
         for epoch in range(start_epoch, self.config.train_config.num_epochs + 1):
