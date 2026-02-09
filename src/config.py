@@ -24,11 +24,9 @@ class PathConfig:
 class ExecutionConfig:
     def __init__(
         self,
-        stage="",
         num_tasks=13,
         gen_test=False,
     ):
-        self.stage = stage
         self.num_tasks = num_tasks
         self.gen_test = gen_test
 
@@ -37,12 +35,10 @@ class ResumptionConfig:
         self,
         resume=False,            
         resume_epoch=0,
-        resume_run_name="",
         resume_wandb_id="",
     ):
         self.resume = resume
         self.resume_epoch = resume_epoch
-        self.resume_run_name = resume_run_name
         self.resume_wandb_id = resume_wandb_id
 
 class ModelConfig:
