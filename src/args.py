@@ -11,7 +11,7 @@ def build_parser():
     parser.add_argument("--run_name", type=str, required=True)
 
     # Execution Config
-    parser.add_argument("--num_tasks", action="store_true")
+    parser.add_argument("--num_tasks", type=int, default=len(Tasks))
     parser.add_argument("--gen_test", action="store_true")
 
     # Resumption Config
