@@ -35,11 +35,9 @@ class ResumptionConfig:
         self,
         resume=False,            
         resume_epoch=0,
-        resume_wandb_id="",
     ):
         self.resume = resume
         self.resume_epoch = resume_epoch
-        self.resume_wandb_id = resume_wandb_id
 
 class ModelConfig:
     def __init__(

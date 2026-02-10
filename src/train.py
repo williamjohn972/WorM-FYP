@@ -25,7 +25,7 @@ class Trainer():
                  dataloaders: Dict,
                  config: Config,
                  device:str,
-                 logger = None, wandb = None
+                 logger = None
                  ):
         
         """
@@ -41,7 +41,6 @@ class Trainer():
         self.device = device
         
         self.logger = logger
-        self.wandb = wandb
 
         # Config
         self.config = config
@@ -512,37 +511,23 @@ class Trainer():
                 print_log(self.logger, val_task_acc_dict, prefix="Val Acc")
                 print_log(self.logger, val_task_loss_dict, prefix="Val Loss")
 
-            # Global metrics
-            if hasattr(self, "wandb") and self.wandb is not None:
-                self.wandb.log({"epoch": epoch, "train/multitask_loss": train_multitask_loss})
-                self.wandb.log({"epoch": epoch, "val/multitask_loss": val_multitask_loss})
-                self.wandb.log({"epoch": epoch, "val/avg_task_acc": avg_val_acc})
 
-                # Per-task metrics
-                for task in train_task_loss_dict:
-                    self.wandb.log({"epoch": epoch, f"train/{task}_loss": train_task_loss_dict[task]})
-                for task in val_task_loss_dict:
-                    self.wandb.log({"epoch": epoch, f"val/{task}_loss": val_task_loss_dict[task]})
-                for task in val_task_acc_dict:
-                    self.wandb.log({"epoch": epoch, f"val/{task}_acc": val_task_acc_dict[task]})
-
-
-            # TEST best model in regular intervals
-            if epoch % self.config.train_config.test_interval == 0:
-                results, test_detailed_acc, gen_test_detailed_acc = self.test(epoch=epoch, checkpoint_fname="best.pt")
+            # # TEST best model in regular intervals
+            # if epoch % self.config.train_config.test_interval == 0:
+            #     results, test_detailed_acc, gen_test_detailed_acc = self.test(epoch=epoch, checkpoint_fname="best.pt")
                 
-                test_folder = os.path.join(self.config.path_config.output_folder, "test")
-                os.makedirs(test_folder, exist_ok=True)
+            #     test_folder = os.path.join(self.config.path_config.output_folder, "test")
+            #     os.makedirs(test_folder, exist_ok=True)
 
-                with open(os.path.join(test_folder, "best_results.json"), "w") as f:
-                    json.dump(results,f)
+            #     with open(os.path.join(test_folder, "best_results.json"), "w") as f:
+            #         json.dump(results,f)
 
-                with open(os.path.join(test_folder, "best_test_detailed_acc.json"), "w") as f:
-                    json.dump(test_detailed_acc,f)
+            #     with open(os.path.join(test_folder, "best_test_detailed_acc.json"), "w") as f:
+            #         json.dump(test_detailed_acc,f)
 
-                if gen_test_detailed_acc is not None:
-                    with open(os.path.join(test_folder, "best_gen_test_detailed_acc.json"), "w") as f:
-                        json.dump(gen_test_detailed_acc, f)
+            #     if gen_test_detailed_acc is not None:
+            #         with open(os.path.join(test_folder, "best_gen_test_detailed_acc.json"), "w") as f:
+            #             json.dump(gen_test_detailed_acc, f)
 
 
         if hasattr(self, "logger") and self.logger:
@@ -578,12 +563,12 @@ class Trainer():
                 "task_acc": {str(k): float(v) for k, v in test_task_acc.items()},
             }
         
-        # viz_results(
-        #     epoch=epoch,
-        #     detailed_acc=test_detailed_acc,
-        #     config=self.config,
-        #     task_list=self.task_list
-        # )
+        viz_results(
+            epoch=epoch,
+            detailed_acc=test_detailed_acc,
+            config=self.config,
+            task_list=self.task_list
+        )
         
         if hasattr(self, "logger") and self.logger:
             self.logger.info("=== TEST RESULTS ===")
@@ -603,12 +588,12 @@ class Trainer():
                 "task_acc": {str(k): float(v) for k, v in gen_test_task_acc.items()},
             }
 
-            # viz_results(
-            #     epoch=epoch,
-            #     detailed_acc=gen_test_detailed_acc,
-            #     config=self.config,
-            #     task_list=self.task_list
-            # )
+            viz_results(
+                epoch=epoch,
+                detailed_acc=gen_test_detailed_acc,
+                config=self.config,
+                task_list=self.task_list
+            )
 
             if hasattr(self, "logger") and self.logger:
                 self.logger.info("=== GEN_TEST RESULTS ===")

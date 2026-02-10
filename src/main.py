@@ -46,7 +46,6 @@ def run(config: Config):
         config=config,
         device=device,
         logger=logger,
-        wandb=None
     )
 
     trainer.fit()
