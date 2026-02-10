@@ -553,7 +553,7 @@ class Trainer():
 
         # Loads the checkpoint
         checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, checkpoint_fname)
-        self.load_checkpoint(checkpoint_path)
+        self.load_checkpoint(checkpoint_fname)
 
         results = {
             "metadata": {
