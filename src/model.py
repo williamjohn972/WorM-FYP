@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 
 from src.tasks import Tasks
-from src.config import Config
 
 from enum import Enum
 
@@ -28,7 +27,7 @@ class Memory_Components(Enum):
 
 class WM_Model(nn.Module):
 
-    def __init__(self, config:Config, device: str):
+    def __init__(self, config, device: str):
 
         super().__init__()
 
