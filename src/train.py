@@ -130,10 +130,9 @@ class Trainer():
 
         return save_path
 
-    def load_checkpoint(self, checkpoint_path = None):
-
-        if checkpoint_path is None:
-            checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, "curr_epoch.pt")
+    def load_checkpoint(self, checkpoint_path = "curr_epoch.pt"):
+       
+        checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, checkpoint_path)
 
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
@@ -434,7 +433,7 @@ class Trainer():
 
         # Resume from previous checkpoint if needed
         if getattr(self.config.resumption_config, "resume", False):
-            if self.config.resumption_config.resume_epoch is not None:
+            if self.config.resumption_config.resume_epoch not in [None, 0]:
                 checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc = self.load_checkpoint(f"epoch_{str(self.config.resumption_config.resume_epoch).zfill(3)}.pt")
             else:
                 checkpoint, start_epoch, best_epoch, best_val_loss, best_val_acc = self.load_checkpoint()
