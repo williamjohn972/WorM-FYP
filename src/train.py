@@ -460,7 +460,8 @@ class Trainer():
             avg_val_acc = sum(val_task_acc_dict.values()) / max(1, len(val_task_acc_dict))
 
             # Decide if this is the best epoch
-            is_best = avg_val_acc > best_val_acc
+            # is_best = avg_val_acc > best_val_acc
+            is_best = val_multitask_loss < best_val_loss
             if is_best:
                 best_val_acc = avg_val_acc
                 best_val_loss = val_multitask_loss
@@ -505,7 +506,7 @@ class Trainer():
                     f"Train Loss: {train_multitask_loss:.4f} | "
                     f"Val Loss: {val_multitask_loss:.4f} | "
                     f"Val Acc: {avg_val_acc:.4f} | "
-                    f"Best Epoch: {best_epoch} Best ValAcc: {best_val_acc:.4f}"
+                    f"Best Epoch: {best_epoch} Best ValLoss: {best_val_loss:.4f}"
                 )
 
                 print_log(self.logger, val_task_acc_dict, prefix="Val Acc")

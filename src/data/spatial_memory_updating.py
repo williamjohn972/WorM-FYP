@@ -379,7 +379,8 @@ class Spatial_Memory_Updating_Generator(Generator):
 
         probe_stims = []
 
-        for probe_box_idx,_ in enumerate(probe_order):
+        # for probe_box_idx,_ in enumerate(probe_order):
+        for _, probe_box_idx in enumerate(probe_order):
             stim, draw = self._init_stim(self.img_config.PROBE_OUTLINE_COLOR)
 
             self._draw_boxes(draw, box_center_coords, probe_box_idx)
