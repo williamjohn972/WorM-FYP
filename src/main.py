@@ -37,7 +37,7 @@ def run(config: Config):
 
     # Create Model 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = WM_Model(config.model_config, device=device)
+    model = WM_Model(config=config, device=device)
 
     # Create Trainer
     trainer = Trainer(
@@ -80,6 +80,7 @@ def config_from_args(args):
         mem_architecture=mem_arch,
         gpu=args.gpu,
         seed=args.seed,
+        task_list=task_list
     )
 
     # Override Sub Configs

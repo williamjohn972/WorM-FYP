@@ -1,7 +1,8 @@
 import torch 
 import torch.nn as nn
 
-from src.tasks import Tasks, task_id_map
+from src.tasks import Tasks
+from src.config import Config
 
 from enum import Enum
 
@@ -27,12 +28,13 @@ class Memory_Components(Enum):
 
 class WM_Model(nn.Module):
 
-    def __init__(self, config, device: str):
+    def __init__(self, config:Config, device: str):
 
         super().__init__()
 
-        self.config = config
+        self.config = config.model_config
         self.device = device
+        self.task_id_map = config.task_config.task_id_map
 
         # Create CNN Encoder and Projection Head
         if self.config.use_cnn:
@@ -113,7 +115,7 @@ class WM_Model(nn.Module):
             projection_output = X.reshape(batch_size, sequence_length, self.config.projection_size)
     
         # First we need to convert our task to a task id 
-        task_id = task_id_map[task]
+        task_id = self.task_id_map[task]
         task_idx = torch.tensor([task_id], dtype = torch.long).to(self.device)
         # Lookup Task Embedding
         task_embedding = self.Task_Embeddings(task_idx)

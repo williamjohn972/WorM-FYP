@@ -129,21 +129,23 @@ class TaskConfig:
             task_list = [
                 Tasks.SPATIAL_COORDINATION,
                 Tasks.SPATIAL_FREE_RECALL,
-                Tasks.SPATIAL_INTEGRATION,
-                Tasks.SPATIAL_MEMORY_UPDATING,
-                Tasks.SPATIAL_TASK_SWITCHING,
+                Tasks.SPATIAL_INTEGRATION, #
+                Tasks.SPATIAL_MEMORY_UPDATING, #
+                Tasks.SPATIAL_TASK_SWITCHING, #
 
-                Tasks.VISUAL_ITEM_RECOGNITION,
-                Tasks.VISUAL_SERIAL_RECALL,
+                Tasks.VISUAL_ITEM_RECOGNITION, #
+                Tasks.VISUAL_SERIAL_RECALL, #
                 Tasks.VISUAL_SERIAL_RECOGNITION,
 
                 Tasks.CHANGE_DETECTION_COLOR,
                 Tasks.CHANGE_DETECTION_ORIENTATION,
                 Tasks.CHANGE_DETECTION_SIZE,
                 Tasks.CHANGE_DETECTION_GAP,
-                Tasks.CHANGE_DETECTION_CONJ,
+                Tasks.CHANGE_DETECTION_CONJ, #
             ]
         self.task_list = task_list
+
+        self.task_id_map = {task: index for index,task in enumerate(self.task_list)}
 
 class Config:
     def __init__(
@@ -152,11 +154,12 @@ class Config:
         root_folder,
         run_name,
         mem_architecture=Memory_Components.GRU,
+        task_list=None,
         gpu=0,
         seed=86,
     ):
         # tasks first → defines num_tasks
-        self.task_config = TaskConfig()
+        self.task_config = TaskConfig(task_list=task_list)
         num_tasks = len(self.task_config.task_list)
 
         # core configs

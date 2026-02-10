@@ -1,0 +1,3010 @@
+{
+    "SC_Task": [
+        52.0,
+        120
+    ],
+    "SFR_Task_Forward Order": [
+        0.0,
+        120
+    ],
+    "SFR_Task_No Order": [
+        0.0,
+        120
+    ],
+    "SFR_Task_list_length_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_1": [
+        2.0,
+        120
+    ],
+    "SFR_Task_list_length_1_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_1": [
+        22.0,
+        40
+    ],
+    "SMU_Task_set_size_1": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_1": [
+        24.0,
+        120
+    ],
+    "SMU_Task_serial_position_1_set_size_1": [
+        4.0,
+        15
+    ],
+    "STS_Task": [
+        955.0,
+        1928
+    ],
+    "VIR_Task_retention_interval_0": [
+        10.0,
+        24
+    ],
+    "VIR_Task_serial_position_1": [
+        5.0,
+        20
+    ],
+    "VIR_Task_retention_interval_0_serial_position_1": [
+        1.0,
+        6
+    ],
+    "VIR_Task_serial_position_4": [
+        10.0,
+        18
+    ],
+    "VIR_Task_retention_interval_0_serial_position_4": [
+        4.0,
+        5
+    ],
+    "VIR_Task_serial_position_2": [
+        7.0,
+        15
+    ],
+    "VIR_Task_retention_interval_0_serial_position_2": [
+        2.0,
+        5
+    ],
+    "VIR_Task_retention_interval_2": [
+        8.0,
+        24
+    ],
+    "VIR_Task_serial_position_3": [
+        13.0,
+        25
+    ],
+    "VIR_Task_retention_interval_2_serial_position_3": [
+        1.0,
+        3
+    ],
+    "VIR_Task_retention_interval_2_serial_position_4": [
+        1.0,
+        3
+    ],
+    "VSR_Task_Whole Sequence Correct": [
+        0.0,
+        120
+    ],
+    "VSR_Task_list_length_2": [
+        5.0,
+        30
+    ],
+    "VSR_Task_serial_position_1": [
+        12.0,
+        120
+    ],
+    "VSR_Task_list_length_2_serial_position_1": [
+        3.0,
+        15
+    ],
+    "VSR_Task_serial_position_2": [
+        8.0,
+        120
+    ],
+    "VSR_Task_list_length_2_serial_position_2": [
+        2.0,
+        15
+    ],
+    "VSRec_Task_Whole Sequence Correct": [
+        10.0,
+        120
+    ],
+    "VSRec_Task_list_length_2": [
+        17.0,
+        30
+    ],
+    "VSRec_Task_distractor_diff_4": [
+        47.0,
+        79
+    ],
+    "VSRec_Task_serial_position_1": [
+        58.0,
+        120
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_2_serial_position_1": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_serial_position_2": [
+        62.0,
+        120
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_2_serial_position_2": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_10": [
+        69.0,
+        147
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_2_serial_position_1": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_2_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2": [
+        70.0,
+        141
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_2_serial_position_1": [
+        3.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_2_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6": [
+        68.0,
+        142
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_2_serial_position_1": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_2_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_8": [
+        71.0,
+        151
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_2_serial_position_1": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_2_serial_position_2": [
+        1.0,
+        3
+    ],
+    "CD_Color_Task_set_size_2": [
+        11.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0": [
+        17.0,
+        30
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_2": [
+        4.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6": [
+        14.0,
+        30
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_2": [
+        9.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0": [
+        12.0,
+        30
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6": [
+        16.0,
+        30
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_set_size_2": [
+        10.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0": [
+        18.0,
+        30
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_2": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6": [
+        15.0,
+        30
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_2": [
+        2.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_2": [
+        11.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0": [
+        17.0,
+        30
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6": [
+        16.0,
+        30
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_2": [
+        10.0,
+        20
+    ],
+    "CD_Conj_Task_retention_interval_0": [
+        13.0,
+        30
+    ],
+    "CD_Conj_Task_conj_label_0": [
+        0.0,
+        13
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_0_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_1": [
+        0.0,
+        9
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_0_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_2": [
+        0.0,
+        13
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_0_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3": [
+        0.0,
+        19
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_2": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_retention_interval_6": [
+        21.0,
+        30
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_6_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_6_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4": [
+        66.0,
+        66
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_2": [
+        3.0,
+        3
+    ],
+    "SFR_Task_list_length_2": [
+        0.0,
+        20
+    ],
+    "SFR_Task_list_length_2_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_2": [
+        2.0,
+        110
+    ],
+    "SFR_Task_list_length_2_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SMU_Task_set_size_2": [
+        8.0,
+        30
+    ],
+    "SMU_Task_serial_position_1_set_size_2": [
+        3.0,
+        15
+    ],
+    "SMU_Task_serial_position_2": [
+        30.0,
+        105
+    ],
+    "SMU_Task_serial_position_2_set_size_2": [
+        5.0,
+        15
+    ],
+    "VIR_Task_retention_interval_2_serial_position_2": [
+        0.0,
+        4
+    ],
+    "VIR_Task_retention_interval_4": [
+        13.0,
+        24
+    ],
+    "VIR_Task_retention_interval_4_serial_position_3": [
+        3.0,
+        5
+    ],
+    "VIR_Task_retention_interval_4_serial_position_2": [
+        1.0,
+        2
+    ],
+    "VIR_Task_retention_interval_4_serial_position_4": [
+        2.0,
+        2
+    ],
+    "VIR_Task_retention_interval_4_serial_position_1": [
+        1.0,
+        5
+    ],
+    "VIR_Task_retention_interval_5": [
+        15.0,
+        24
+    ],
+    "VIR_Task_retention_interval_5_serial_position_3": [
+        7.0,
+        10
+    ],
+    "VIR_Task_retention_interval_5_serial_position_4": [
+        3.0,
+        5
+    ],
+    "VSR_Task_list_length_3": [
+        6.0,
+        45
+    ],
+    "VSR_Task_list_length_3_serial_position_1": [
+        3.0,
+        15
+    ],
+    "VSR_Task_list_length_3_serial_position_2": [
+        1.0,
+        15
+    ],
+    "VSR_Task_serial_position_3": [
+        16.0,
+        105
+    ],
+    "VSR_Task_list_length_3_serial_position_3": [
+        2.0,
+        15
+    ],
+    "VSRec_Task_list_length_3": [
+        28.0,
+        45
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_3_serial_position_1": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_3_serial_position_2": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_serial_position_3": [
+        48.0,
+        105
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_3_serial_position_3": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_3_serial_position_1": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_3_serial_position_2": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_3_serial_position_3": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_3_serial_position_1": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_3_serial_position_2": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_3_serial_position_3": [
+        1.0,
+        1
+    ],
+    "CD_Color_Task_retention_interval_12": [
+        16.0,
+        30
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_2": [
+        1.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18": [
+        16.0,
+        30
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12": [
+        16.0,
+        30
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_2": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18": [
+        16.0,
+        30
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_2": [
+        1.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12": [
+        16.0,
+        30
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_2": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18": [
+        16.0,
+        30
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_2": [
+        1.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12": [
+        20.0,
+        30
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_2": [
+        1.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18": [
+        16.0,
+        30
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_2": [
+        4.0,
+        5
+    ],
+    "CD_Conj_Task_retention_interval_12": [
+        18.0,
+        30
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_12_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_2": [
+        3.0,
+        3
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_12_set_size_2": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_retention_interval_18": [
+        14.0,
+        30
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_18_set_size_2": [
+        4.0,
+        4
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_18_set_size_2": [
+        0.0,
+        1
+    ],
+    "SFR_Task_list_length_3": [
+        1.0,
+        30
+    ],
+    "SFR_Task_list_length_3_serial_position_1": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_3_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_3": [
+        1.0,
+        100
+    ],
+    "SFR_Task_list_length_3_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_2": [
+        24.0,
+        40
+    ],
+    "VIR_Task_retention_interval_5_serial_position_2": [
+        1.0,
+        1
+    ],
+    "VIR_Task_retention_interval_6": [
+        11.0,
+        24
+    ],
+    "VIR_Task_retention_interval_6_serial_position_1": [
+        1.0,
+        3
+    ],
+    "VIR_Task_retention_interval_6_serial_position_3": [
+        2.0,
+        6
+    ],
+    "VIR_Task_retention_interval_6_serial_position_2": [
+        3.0,
+        3
+    ],
+    "VIR_Task_retention_interval_6_serial_position_4": [
+        0.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_3_serial_position_1": [
+        4.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_3_serial_position_2": [
+        4.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_3_serial_position_3": [
+        2.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_3_serial_position_1": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_3_serial_position_2": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_3_serial_position_3": [
+        1.0,
+        2
+    ],
+    "CD_Color_Task_set_size_4": [
+        8.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_4": [
+        1.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_4": [
+        10.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_set_size_4": [
+        11.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_4": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_4": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_4": [
+        13.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_4": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_4": [
+        4.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_4": [
+        13.0,
+        20
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_0_set_size_4": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_0_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_0_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_6_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_4": [
+        4.0,
+        4
+    ],
+    "SFR_Task_list_length_4": [
+        0.0,
+        40
+    ],
+    "SFR_Task_list_length_4_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_4_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_4_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_4": [
+        0.0,
+        90
+    ],
+    "SFR_Task_list_length_4_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SMU_Task_set_size_3": [
+        10.0,
+        45
+    ],
+    "SMU_Task_serial_position_1_set_size_3": [
+        3.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_3": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_3": [
+        22.0,
+        90
+    ],
+    "SMU_Task_serial_position_3_set_size_3": [
+        3.0,
+        15
+    ],
+    "VIR_Task_retention_interval_0_serial_position_3": [
+        0.0,
+        1
+    ],
+    "VIR_Task_serial_position_6": [
+        8.0,
+        12
+    ],
+    "VIR_Task_retention_interval_0_serial_position_6": [
+        2.0,
+        4
+    ],
+    "VIR_Task_serial_position_5": [
+        5.0,
+        10
+    ],
+    "VIR_Task_retention_interval_2_serial_position_5": [
+        2.0,
+        4
+    ],
+    "VSR_Task_list_length_4": [
+        6.0,
+        60
+    ],
+    "VSR_Task_list_length_4_serial_position_1": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_4_serial_position_2": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_4_serial_position_3": [
+        3.0,
+        15
+    ],
+    "VSR_Task_serial_position_4": [
+        10.0,
+        90
+    ],
+    "VSR_Task_list_length_4_serial_position_4": [
+        2.0,
+        15
+    ],
+    "VSRec_Task_list_length_4": [
+        31.0,
+        60
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_4_serial_position_1": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_4_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_4_serial_position_3": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_serial_position_4": [
+        50.0,
+        90
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_4_serial_position_4": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_4_serial_position_1": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_4_serial_position_2": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_4_serial_position_3": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_4_serial_position_4": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_4_serial_position_1": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_4_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_4_serial_position_3": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_4_serial_position_4": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_4_serial_position_1": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_4_serial_position_2": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_4_serial_position_3": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_4_serial_position_4": [
+        3.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_4_serial_position_1": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_4_serial_position_2": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_4_serial_position_3": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_4_serial_position_4": [
+        1.0,
+        1
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_4": [
+        3.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_4": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_4": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_4": [
+        1.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_4": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_4": [
+        2.0,
+        5
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_4": [
+        4.0,
+        4
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_12_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_18_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_18_set_size_4": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_18_set_size_4": [
+        3.0,
+        3
+    ],
+    "SFR_Task_list_length_5": [
+        0.0,
+        50
+    ],
+    "SFR_Task_list_length_5_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_5_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_5_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_5_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_5": [
+        0.0,
+        80
+    ],
+    "SFR_Task_list_length_5_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_3": [
+        24.0,
+        40
+    ],
+    "SMU_Task_set_size_4": [
+        11.0,
+        60
+    ],
+    "SMU_Task_serial_position_1_set_size_4": [
+        3.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_4": [
+        3.0,
+        15
+    ],
+    "SMU_Task_serial_position_3_set_size_4": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_4": [
+        12.0,
+        75
+    ],
+    "SMU_Task_serial_position_4_set_size_4": [
+        3.0,
+        15
+    ],
+    "VIR_Task_retention_interval_2_serial_position_1": [
+        1.0,
+        4
+    ],
+    "VIR_Task_retention_interval_4_serial_position_5": [
+        1.0,
+        2
+    ],
+    "VIR_Task_retention_interval_4_serial_position_6": [
+        3.0,
+        4
+    ],
+    "VIR_Task_retention_interval_5_serial_position_6": [
+        1.0,
+        2
+    ],
+    "VSR_Task_list_length_5": [
+        9.0,
+        75
+    ],
+    "VSR_Task_list_length_5_serial_position_1": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_5_serial_position_2": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_5_serial_position_3": [
+        4.0,
+        15
+    ],
+    "VSR_Task_list_length_5_serial_position_4": [
+        3.0,
+        15
+    ],
+    "VSR_Task_serial_position_5": [
+        11.0,
+        75
+    ],
+    "VSR_Task_list_length_5_serial_position_5": [
+        1.0,
+        15
+    ],
+    "VSRec_Task_list_length_5": [
+        42.0,
+        75
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_5_serial_position_1": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_5_serial_position_2": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_5_serial_position_3": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_5_serial_position_4": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_serial_position_5": [
+        36.0,
+        75
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_5_serial_position_5": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_5_serial_position_1": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_5_serial_position_2": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_5_serial_position_3": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_5_serial_position_4": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_5_serial_position_5": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_5_serial_position_1": [
+        4.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_5_serial_position_2": [
+        4.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_5_serial_position_3": [
+        2.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_5_serial_position_4": [
+        4.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_5_serial_position_5": [
+        3.0,
+        6
+    ],
+    "CD_Color_Task_set_size_6": [
+        9.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_6": [
+        12.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_6": [
+        1.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_set_size_6": [
+        8.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_6": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_6": [
+        1.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_6": [
+        12.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_6": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_6": [
+        2.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_6": [
+        9.0,
+        20
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_6": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_0_set_size_6": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_0_set_size_6": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_6": [
+        3.0,
+        3
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_6_set_size_6": [
+        0.0,
+        2
+    ],
+    "SFR_Task_list_length_6": [
+        1.0,
+        60
+    ],
+    "SFR_Task_list_length_6_serial_position_1": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_6_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_6_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_6_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_6_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_6": [
+        1.0,
+        70
+    ],
+    "SFR_Task_list_length_6_serial_position_6": [
+        0.0,
+        10
+    ],
+    "VIR_Task_retention_interval_5_serial_position_1": [
+        1.0,
+        2
+    ],
+    "VIR_Task_retention_interval_6_serial_position_5": [
+        2.0,
+        3
+    ],
+    "VIR_Task_retention_interval_6_serial_position_6": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_5_serial_position_1": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_5_serial_position_2": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_5_serial_position_3": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_5_serial_position_4": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_5_serial_position_5": [
+        1.0,
+        1
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_6": [
+        1.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_6": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_6": [
+        4.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_6": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_6": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_6": [
+        3.0,
+        5
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_6": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_12_set_size_6": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_12_set_size_6": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_18_set_size_6": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_18_set_size_6": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_18_set_size_6": [
+        0.0,
+        1
+    ],
+    "SFR_Task_list_length_7": [
+        0.0,
+        70
+    ],
+    "SFR_Task_list_length_7_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_7_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_7_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_7_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_7_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_7_serial_position_6": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_7": [
+        0.0,
+        60
+    ],
+    "SFR_Task_list_length_7_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_4": [
+        22.0,
+        40
+    ],
+    "SMU_Task_set_size_5": [
+        19.0,
+        75
+    ],
+    "SMU_Task_serial_position_1_set_size_5": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_5": [
+        5.0,
+        15
+    ],
+    "SMU_Task_serial_position_3_set_size_5": [
+        3.0,
+        15
+    ],
+    "SMU_Task_serial_position_4_set_size_5": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_5": [
+        19.0,
+        60
+    ],
+    "SMU_Task_serial_position_5_set_size_5": [
+        5.0,
+        15
+    ],
+    "VIR_Task_serial_position_8": [
+        1.0,
+        6
+    ],
+    "VIR_Task_retention_interval_0_serial_position_8": [
+        0.0,
+        1
+    ],
+    "VIR_Task_retention_interval_2_serial_position_8": [
+        0.0,
+        1
+    ],
+    "VSR_Task_list_length_6": [
+        7.0,
+        90
+    ],
+    "VSR_Task_list_length_6_serial_position_1": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_6_serial_position_2": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_6_serial_position_3": [
+        3.0,
+        15
+    ],
+    "VSR_Task_list_length_6_serial_position_4": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_6_serial_position_5": [
+        1.0,
+        15
+    ],
+    "VSR_Task_serial_position_6": [
+        7.0,
+        60
+    ],
+    "VSR_Task_list_length_6_serial_position_6": [
+        2.0,
+        15
+    ],
+    "VSRec_Task_list_length_6": [
+        42.0,
+        90
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_1": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_2": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_3": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_4": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_5": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_serial_position_6": [
+        29.0,
+        60
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_6_serial_position_6": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_1": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_2": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_3": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_4": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_5": [
+        4.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_6_serial_position_6": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_1": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_2": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_3": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_4": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_5": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_6_serial_position_6": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_1": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_2": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_3": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_4": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_5": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_6_serial_position_6": [
+        1.0,
+        1
+    ],
+    "CD_Color_Task_set_size_8": [
+        11.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_8": [
+        1.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_8": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_8": [
+        11.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_8": [
+        4.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_set_size_8": [
+        12.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_8": [
+        10.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_8": [
+        1.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_8": [
+        8.0,
+        20
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_8": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_0_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_0_set_size_8": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_8": [
+        3.0,
+        3
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_6_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_6_set_size_8": [
+        0.0,
+        1
+    ],
+    "SFR_Task_list_length_8": [
+        1.0,
+        80
+    ],
+    "SFR_Task_list_length_8_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_3": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_6": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_8_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_8": [
+        0.0,
+        50
+    ],
+    "SFR_Task_list_length_8_serial_position_8": [
+        0.0,
+        10
+    ],
+    "SMU_Task_set_size_6": [
+        22.0,
+        90
+    ],
+    "SMU_Task_serial_position_1_set_size_6": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_6": [
+        5.0,
+        15
+    ],
+    "SMU_Task_serial_position_3_set_size_6": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_4_set_size_6": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_5_set_size_6": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_6": [
+        6.0,
+        45
+    ],
+    "SMU_Task_serial_position_6_set_size_6": [
+        3.0,
+        15
+    ],
+    "VIR_Task_retention_interval_4_serial_position_8": [
+        1.0,
+        1
+    ],
+    "VIR_Task_serial_position_7": [
+        4.0,
+        7
+    ],
+    "VIR_Task_retention_interval_4_serial_position_7": [
+        0.0,
+        1
+    ],
+    "VIR_Task_retention_interval_5_serial_position_8": [
+        0.0,
+        2
+    ],
+    "VSR_Task_list_length_7": [
+        13.0,
+        105
+    ],
+    "VSR_Task_list_length_7_serial_position_1": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_7_serial_position_2": [
+        4.0,
+        15
+    ],
+    "VSR_Task_list_length_7_serial_position_3": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_7_serial_position_4": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_7_serial_position_5": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_7_serial_position_6": [
+        1.0,
+        15
+    ],
+    "VSR_Task_serial_position_7": [
+        8.0,
+        45
+    ],
+    "VSR_Task_list_length_7_serial_position_7": [
+        5.0,
+        15
+    ],
+    "VSRec_Task_list_length_7": [
+        47.0,
+        105
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_1": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_2": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_3": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_4": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_5": [
+        0.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_6": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_serial_position_7": [
+        19.0,
+        45
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_7_serial_position_7": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_1": [
+        3.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_2": [
+        5.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_3": [
+        3.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_4": [
+        2.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_5": [
+        3.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_6": [
+        1.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_7_serial_position_7": [
+        1.0,
+        6
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_1": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_2": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_3": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_4": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_5": [
+        0.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_6": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_7_serial_position_7": [
+        1.0,
+        2
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_8": [
+        5.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_8": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_8": [
+        1.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_8": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_8": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_8": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_8": [
+        2.0,
+        5
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_12_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_12_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_8": [
+        3.0,
+        3
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_18_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_18_set_size_8": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_1_retention_interval_18_set_size_8": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_18_set_size_8": [
+        0.0,
+        1
+    ],
+    "SFR_Task_list_length_10": [
+        1.0,
+        100
+    ],
+    "SFR_Task_list_length_10_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_2": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_6": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_10_serial_position_8": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_9": [
+        0.0,
+        40
+    ],
+    "SFR_Task_list_length_10_serial_position_9": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_10": [
+        1.0,
+        40
+    ],
+    "SFR_Task_list_length_10_serial_position_10": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_6": [
+        20.0,
+        40
+    ],
+    "VIR_Task_retention_interval_6_serial_position_7": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_1": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_2": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_3": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_4": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_5": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_6": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_7_serial_position_7": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_1": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_2": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_3": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_4": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_5": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_6": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_7_serial_position_7": [
+        0.0,
+        1
+    ],
+    "CD_Color_Task_set_size_10": [
+        13.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_10": [
+        4.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_10": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_10": [
+        10.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_10": [
+        1.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_10": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_set_size_10": [
+        12.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_10": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_10": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_10": [
+        12.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_10": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_10": [
+        3.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_10": [
+        12.0,
+        20
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_0_set_size_10": [
+        3.0,
+        3
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_0_set_size_10": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_10": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_6_set_size_10": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_10": [
+        4.0,
+        4
+    ],
+    "SFR_Task_list_length_12": [
+        3.0,
+        120
+    ],
+    "SFR_Task_list_length_12_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_6": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_8": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_9": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_12_serial_position_10": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_11": [
+        2.0,
+        30
+    ],
+    "SFR_Task_list_length_12_serial_position_11": [
+        2.0,
+        10
+    ],
+    "SFR_Task_serial_position_12": [
+        0.0,
+        30
+    ],
+    "SFR_Task_list_length_12_serial_position_12": [
+        0.0,
+        10
+    ],
+    "SMU_Task_set_size_7": [
+        30.0,
+        105
+    ],
+    "SMU_Task_serial_position_1_set_size_7": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_7": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_3_set_size_7": [
+        6.0,
+        15
+    ],
+    "SMU_Task_serial_position_4_set_size_7": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_5_set_size_7": [
+        8.0,
+        15
+    ],
+    "SMU_Task_serial_position_6_set_size_7": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_7": [
+        8.0,
+        30
+    ],
+    "SMU_Task_serial_position_7_set_size_7": [
+        4.0,
+        15
+    ],
+    "VIR_Task_retention_interval_0_serial_position_5": [
+        0.0,
+        1
+    ],
+    "VIR_Task_retention_interval_0_serial_position_7": [
+        1.0,
+        1
+    ],
+    "VIR_Task_serial_position_10": [
+        3.0,
+        4
+    ],
+    "VIR_Task_retention_interval_2_serial_position_10": [
+        1.0,
+        2
+    ],
+    "VIR_Task_retention_interval_2_serial_position_7": [
+        2.0,
+        3
+    ],
+    "VSR_Task_list_length_8": [
+        13.0,
+        120
+    ],
+    "VSR_Task_list_length_8_serial_position_1": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_2": [
+        0.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_3": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_4": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_5": [
+        5.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_6": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_8_serial_position_7": [
+        2.0,
+        15
+    ],
+    "VSR_Task_serial_position_8": [
+        3.0,
+        30
+    ],
+    "VSR_Task_list_length_8_serial_position_8": [
+        2.0,
+        15
+    ],
+    "VSRec_Task_list_length_8": [
+        52.0,
+        120
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_1": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_2": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_3": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_4": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_5": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_6": [
+        4.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_7": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_serial_position_8": [
+        16.0,
+        30
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_8_serial_position_8": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_1": [
+        0.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_3": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_4": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_5": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_6": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_7": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_8_serial_position_8": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_1": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_2": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_3": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_4": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_5": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_6": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_7": [
+        0.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_8_serial_position_8": [
+        0.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_1": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_2": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_3": [
+        0.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_4": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_5": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_6": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_7": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_8_serial_position_8": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_1": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_2": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_3": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_4": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_5": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_6": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_7": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_8_serial_position_8": [
+        0.0,
+        1
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_10": [
+        5.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_10": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_10": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_10": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_10": [
+        3.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_10": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_10": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_10": [
+        2.0,
+        5
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_10": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_12_set_size_10": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_12_set_size_10": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_18_set_size_10": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_18_set_size_10": [
+        3.0,
+        3
+    ],
+    "SFR_Task_list_length_15": [
+        1.0,
+        150
+    ],
+    "SFR_Task_list_length_15_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_2": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_6": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_8": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_9": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_10": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_11": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_15_serial_position_12": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_13": [
+        1.0,
+        20
+    ],
+    "SFR_Task_list_length_15_serial_position_13": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_14": [
+        0.0,
+        20
+    ],
+    "SFR_Task_list_length_15_serial_position_14": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_15": [
+        0.0,
+        20
+    ],
+    "SFR_Task_list_length_15_serial_position_15": [
+        0.0,
+        10
+    ],
+    "SI_Task_part_size_12": [
+        22.0,
+        40
+    ],
+    "SMU_Task_set_size_8": [
+        21.0,
+        120
+    ],
+    "SMU_Task_serial_position_1_set_size_8": [
+        1.0,
+        15
+    ],
+    "SMU_Task_serial_position_2_set_size_8": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_3_set_size_8": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_4_set_size_8": [
+        1.0,
+        15
+    ],
+    "SMU_Task_serial_position_5_set_size_8": [
+        2.0,
+        15
+    ],
+    "SMU_Task_serial_position_6_set_size_8": [
+        1.0,
+        15
+    ],
+    "SMU_Task_serial_position_7_set_size_8": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_8": [
+        4.0,
+        15
+    ],
+    "SMU_Task_serial_position_8_set_size_8": [
+        4.0,
+        15
+    ],
+    "VIR_Task_retention_interval_4_serial_position_10": [
+        1.0,
+        1
+    ],
+    "VIR_Task_serial_position_9": [
+        1.0,
+        3
+    ],
+    "VIR_Task_retention_interval_4_serial_position_9": [
+        0.0,
+        1
+    ],
+    "VSR_Task_list_length_9": [
+        17.0,
+        135
+    ],
+    "VSR_Task_list_length_9_serial_position_1": [
+        2.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_2": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_3": [
+        2.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_4": [
+        2.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_5": [
+        4.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_6": [
+        3.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_7": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_8": [
+        1.0,
+        15
+    ],
+    "VSR_Task_serial_position_9": [
+        1.0,
+        15
+    ],
+    "VSR_Task_list_length_9_serial_position_9": [
+        1.0,
+        15
+    ],
+    "VSRec_Task_list_length_9": [
+        66.0,
+        135
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_1": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_2": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_3": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_4": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_5": [
+        3.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_6": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_7": [
+        2.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_8": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_serial_position_9": [
+        7.0,
+        15
+    ],
+    "VSRec_Task_distractor_diff_8_list_length_9_serial_position_9": [
+        1.0,
+        5
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_1": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_2": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_3": [
+        2.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_4": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_5": [
+        1.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_6": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_7": [
+        0.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_8": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_6_list_length_9_serial_position_9": [
+        3.0,
+        4
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_1": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_2": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_3": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_4": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_5": [
+        0.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_6": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_7": [
+        1.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_8": [
+        2.0,
+        2
+    ],
+    "VSRec_Task_distractor_diff_4_list_length_9_serial_position_9": [
+        1.0,
+        2
+    ],
+    "CD_Color_Task_set_size_12": [
+        11.0,
+        20
+    ],
+    "CD_Color_Task_retention_interval_0_set_size_12": [
+        4.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_6_set_size_12": [
+        2.0,
+        5
+    ],
+    "CD_Orientation_Task_set_size_12": [
+        8.0,
+        20
+    ],
+    "CD_Orientation_Task_retention_interval_0_set_size_12": [
+        1.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_6_set_size_12": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_set_size_12": [
+        12.0,
+        20
+    ],
+    "CD_Size_Task_retention_interval_0_set_size_12": [
+        4.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_6_set_size_12": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_set_size_12": [
+        11.0,
+        20
+    ],
+    "CD_Gap_Task_retention_interval_0_set_size_12": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_6_set_size_12": [
+        1.0,
+        5
+    ],
+    "CD_Conj_Task_set_size_12": [
+        14.0,
+        20
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_0_set_size_12": [
+        4.0,
+        4
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_0_set_size_12": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_6_set_size_12": [
+        4.0,
+        4
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_6_set_size_12": [
+        0.0,
+        1
+    ],
+    "SFR_Task_list_length_18": [
+        2.0,
+        180
+    ],
+    "SFR_Task_list_length_18_serial_position_1": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_2": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_3": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_4": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_5": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_6": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_7": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_8": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_9": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_10": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_11": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_12": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_13": [
+        1.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_14": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_15": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_16": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_16": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_17": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_17": [
+        0.0,
+        10
+    ],
+    "SFR_Task_serial_position_18": [
+        0.0,
+        10
+    ],
+    "SFR_Task_list_length_18_serial_position_18": [
+        0.0,
+        10
+    ],
+    "VIR_Task_retention_interval_5_serial_position_7": [
+        1.0,
+        1
+    ],
+    "VIR_Task_retention_interval_5_serial_position_10": [
+        1.0,
+        1
+    ],
+    "VIR_Task_retention_interval_6_serial_position_9": [
+        1.0,
+        2
+    ],
+    "VIR_Task_retention_interval_6_serial_position_8": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_1": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_2": [
+        0.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_3": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_4": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_5": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_6": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_7": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_8": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_10_list_length_9_serial_position_9": [
+        1.0,
+        1
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_1": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_2": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_3": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_4": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_5": [
+        3.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_6": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_7": [
+        2.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_8": [
+        1.0,
+        3
+    ],
+    "VSRec_Task_distractor_diff_2_list_length_9_serial_position_9": [
+        1.0,
+        3
+    ],
+    "CD_Color_Task_retention_interval_12_set_size_12": [
+        1.0,
+        5
+    ],
+    "CD_Color_Task_retention_interval_18_set_size_12": [
+        4.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_12_set_size_12": [
+        3.0,
+        5
+    ],
+    "CD_Orientation_Task_retention_interval_18_set_size_12": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_12_set_size_12": [
+        2.0,
+        5
+    ],
+    "CD_Size_Task_retention_interval_18_set_size_12": [
+        3.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_12_set_size_12": [
+        4.0,
+        5
+    ],
+    "CD_Gap_Task_retention_interval_18_set_size_12": [
+        3.0,
+        5
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_12_set_size_12": [
+        4.0,
+        4
+    ],
+    "CD_Conj_Task_conj_label_0_retention_interval_12_set_size_12": [
+        0.0,
+        1
+    ],
+    "CD_Conj_Task_conj_label_3_retention_interval_18_set_size_12": [
+        0.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_4_retention_interval_18_set_size_12": [
+        2.0,
+        2
+    ],
+    "CD_Conj_Task_conj_label_2_retention_interval_18_set_size_12": [
+        0.0,
+        1
+    ]
+}
