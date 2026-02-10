@@ -386,6 +386,7 @@ class Trainer():
                         detailed_acc[comp_key][1] += 1
 
             # Backprop + Optimizer step
+            multitask_loss_this_step = multitask_loss_this_step / max(1, len(self.task_list))
             if is_train_mode:
                 multitask_loss_this_step.backward()
                 self.optimizer.step()
@@ -393,7 +394,8 @@ class Trainer():
             # Track epoch level multitask loss
             # average accross tasks at the epoch level
             # divide this steps summed loss by number of tasks
-            multitask_loss_sum += float(multitask_loss_this_step.detach().item()) / max(1, len(self.task_list))
+            # multitask_loss_sum += float(multitask_loss_this_step.detach().item()) / max(1, len(self.task_list))
+            multitask_loss_sum += multitask_loss_this_step.detach().item()
             num_steps += 1
 
 
