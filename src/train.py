@@ -67,7 +67,13 @@ class Trainer():
         self.bce_criterion = nn.BCEWithLogitsLoss()
         self.ce_criterion = nn.CrossEntropyLoss()
 
+        
+        # Dynamic Weight Balancer 
+        self.balancer = Dynamic_Weight_Balancer(self.task_list)
 
+        # Amp and Scaler 
+        self.use_amp = (self.device.startswith("cuda"))
+        self.scaler = torch.cuda.amp.GradScaler(enabled=self.use_amp)
 
     def _make_checkpoint_payload(
         self,
@@ -107,8 +113,10 @@ class Trainer():
             "val_task_loss_dict": val_task_loss_dict,
             "val_task_acc_dict": val_task_acc_dict,
             "best_val_multitask_loss": best_val_multitask_loss,
-            "best_val_multitask_acc": best_val_multitask_acc
+            "best_val_multitask_acc": best_val_multitask_acc,
 
+            # scaler 
+            "scaler_state_dict": self.scaler.state_dict() if self.use_amp else None
         }
 
         return checkpoint
@@ -155,6 +163,10 @@ class Trainer():
             raise KeyError(f"Checkpoint missing 'scheduler_state_dict': {checkpoint_path}")
         
         self.lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+
+        # Load Scaler State 
+        if self.use_amp and checkpoint.get("scaler_state_dict") is not None:
+            self.scaler.load_state_dict(checkpoint["scaler_state_dict"])
 
         # Extract progress
         checkpoint_epoch = int(checkpoint.get("epoch", 1))
@@ -209,76 +221,77 @@ class Trainer():
         # Model output --> logits_seq, mem_output, mem_h_n, projection_output, (cnn_output)
         # Logits seq shape --> (B, T, D) 
         # if model prepends a task token at the start, we need to drop that timestep 
-        logits_seq = forward_logits(stim = stim, 
-                                    task = task, 
-                                    seq_len = seq_len, 
-                                    show_task_time = self.config.model_config.show_task_time,
-                                    model = self.model)
+        with torch.cuda.amp.autocast(enabled=(self.use_amp and mode == Modes.TRAIN)):
+            logits_seq = forward_logits(stim = stim, 
+                                        task = task, 
+                                        seq_len = seq_len, 
+                                        show_task_time = self.config.model_config.show_task_time,
+                                        model = self.model)
 
-        # We need to validate the logits shape to avoid shape bugs
-        validate_logits(task = task, 
-                        logits_seq = logits_seq, 
-                        batch_size = batch_size)
+            # We need to validate the logits shape to avoid shape bugs
+            validate_logits(task = task, 
+                            logits_seq = logits_seq, 
+                            batch_size = batch_size)
 
-        if read_type == ReadType.FINAL:
-            logits_used, targets_used = select_final(
-                task = task,
-                logits_seq = logits_seq,
-                resp = resp,
-                seq_len = seq_len,
-                batch_size = batch_size,
-                is_multilabel = is_multilabel,
-                device = self.device
-            )
-            
-            # Cast dtype based on target type
-            logits_used, targets_used = cast_for_loss(loss_type = loss_type, 
-                                                      logits_used = logits_used, 
-                                                      targets_used = targets_used)
+            if read_type == ReadType.FINAL:
+                logits_used, targets_used = select_final(
+                    task = task,
+                    logits_seq = logits_seq,
+                    resp = resp,
+                    seq_len = seq_len,
+                    batch_size = batch_size,
+                    is_multilabel = is_multilabel,
+                    device = self.device
+                )
+                
+                # Cast dtype based on target type
+                logits_used, targets_used = cast_for_loss(loss_type = loss_type, 
+                                                        logits_used = logits_used, 
+                                                        targets_used = targets_used)
 
-        elif read_type == ReadType.TAIL:
-            logits_used, targets_used = select_tail(
-                task = task, 
-                logits_seq = logits_seq, 
-                resp = resp, 
-                seq_len = seq_len, 
-                batch = batch, 
-                batch_size = batch_size, 
-                k_from = k_from,
-                device = self.device
-            )
+            elif read_type == ReadType.TAIL:
+                logits_used, targets_used = select_tail(
+                    task = task, 
+                    logits_seq = logits_seq, 
+                    resp = resp, 
+                    seq_len = seq_len, 
+                    batch = batch, 
+                    batch_size = batch_size, 
+                    k_from = k_from,
+                    device = self.device
+                )
 
-            logits_used, targets_used = cast_for_loss(loss_type = loss_type, 
-                                                      logits_used = logits_used, 
-                                                      targets_used = targets_used)
+                logits_used, targets_used = cast_for_loss(loss_type = loss_type, 
+                                                        logits_used = logits_used, 
+                                                        targets_used = targets_used)
 
 
-        elif read_type == ReadType.SEQUENCE:
-            logits_used, targets_used = select_seq(
-                task = task, 
-                logits_seq = logits_seq, 
-                resp = resp, 
-                seq_len = seq_len, 
-                batch_size = batch_size
-            )
+            elif read_type == ReadType.SEQUENCE:
+                logits_used, targets_used = select_seq(
+                    task = task, 
+                    logits_seq = logits_seq, 
+                    resp = resp, 
+                    seq_len = seq_len, 
+                    batch_size = batch_size
+                )
 
-            # Mask out padding tokens if configured
-            if pad_value is not None:
-                logits_used, targets_used = mask_padding(logits_used = logits_used, 
-                                                         targets_used = targets_used, 
-                                                         pad_value = pad_value)
+                # Mask out padding tokens if configured
+                if pad_value is not None:
+                    logits_used, targets_used = mask_padding(logits_used = logits_used, 
+                                                            targets_used = targets_used, 
+                                                            pad_value = pad_value)
 
-            if loss_type == LossType.CATEGORICAL:
-                targets_used = targets_used.long()
+                if loss_type == LossType.CATEGORICAL:
+                    targets_used = targets_used.long()
+                else:
+                    targets_used = targets_used.float()
+
             else:
-                targets_used = targets_used.float()
-
-        else:
-            raise ValueError(f"{task}: Unknown ReadType {read_type}")
+                raise ValueError(f"{task}: Unknown ReadType {read_type}")
+                
+            # Now its time to compute the loss
+            loss = LOSS_FN_MAP[loss_type](self, logits = logits_used, targets = targets_used)
             
-        # Now its time to compute the loss
-        loss = LOSS_FN_MAP[loss_type](self, logits = logits_used, targets = targets_used)
-        
         # Time to compute metrics
         metrics = compute_metrics(mode = mode, 
                                   loss_type = loss_type, 
@@ -333,15 +346,23 @@ class Trainer():
             # We will accumulate task losses into one multitask loss
             multitask_loss_this_step = 0.0
 
+            # Task Loss Weight Balancing 
+            task_loss_tensors = {}
+
             # Process each task batch inside this step
             for task_idx, task in enumerate(self.task_list):
                 raw_task_batch = multitask_batch[task_idx]
 
                 loss_tensor, metrics = self._run_one_batch(task=task, raw_batch=raw_task_batch, mode=mode)
 
+                # Task Loss Weight Balancing 
+                task_loss_tensors[task] = loss_tensor
+
                 # update multitask_loss in this step
-                multitask_loss_this_step += loss_tensor
+                # multitask_loss_this_step += loss_tensor
                 task_loss_sum[task] += metrics["loss"]
+                
+
 
                 # record per task acc only for not train modes
                 if not is_train_mode:
@@ -385,17 +406,40 @@ class Trainer():
                         detailed_acc[comp_key][0] += correct
                         detailed_acc[comp_key][1] += 1
 
+            # For Task Loss Weight Balancing 
+            # Use the balancer to producde the final multitask loss for backprop
+            if is_train_mode:
+                multitask_loss_this_step = self.balancer.get_weighted_loss(task_loss_tensors)
+
+            else:
+                multitask_loss_this_step = sum(task_loss_tensors.values())
+                
+            
+
             # Backprop + Optimizer step
             # multitask_loss_this_step = multitask_loss_this_step / max(1, len(self.task_list))
             if is_train_mode:
-                multitask_loss_this_step.backward()
-                self.optimizer.step()
+                # multitask_loss_this_step.backward()
+                # # Gradient clipping since we are planning to downscale the dataset size
+                # torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+                # self.optimizer.step()
+
+                self.scaler.scale(multitask_loss_this_step).backward()
+
+                # unscale before clipping
+                self.scaler.unscale_(self.optimizer)
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+
+                self.scaler.step(self.optimizer)
+                self.scaler.update()
         
             # Track epoch level multitask loss
             # average accross tasks at the epoch level
             # divide this steps summed loss by number of tasks
-            multitask_loss_sum += float(multitask_loss_this_step.detach().item()) / max(1, len(self.task_list))
+            # multitask_loss_sum += float(multitask_loss_this_step.detach().item()) / max(1, len(self.task_list))
             # multitask_loss_sum += multitask_loss_this_step.detach().item()
+            # Changedthe form becuase of our weight balancing
+            multitask_loss_sum += float(multitask_loss_this_step.detach().item()) 
             num_steps += 1
 
 
@@ -452,6 +496,15 @@ class Trainer():
             # Val 
             val_multitask_loss, val_task_loss_dict, val_task_acc_dict, _ = self._run_one_epoch(mode=Modes.VAL, loaders=val_loaders, epoch_num=epoch)
             assert val_task_acc_dict != None
+
+            # Task Loss Weight Balancing 
+            # Update weights using the validation accuracies 
+            self.balancer.update_weights(val_task_acc_dict)
+
+            if self.logger:
+                self.logger.info(f"Loss weights: " + ", ".join(
+                    [f"{t.value}:{self.balancer.weights[t]:.3f}" for t in self.task_list]
+                ))
 
             if hasattr(self, "lr_scheduler") and self.lr_scheduler is not None:
                 self.lr_scheduler.step(val_multitask_loss)

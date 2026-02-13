@@ -346,3 +346,93 @@ def validate_logits(task, logits_seq: torch.Tensor, batch_size: int):
     if logits_seq.ndim != 3 or logits_seq.shape[0] != batch_size:
         raise RuntimeError(f"{task}: expected logits_seq shape (B,T,D), got {tuple(logits_seq.shape)}")
 
+class Dynamic_Weight_Balancer():
+
+    def __init__(self, 
+                 tasks,
+                 ema_beta = 0.9,
+                 power = 2.0,
+                 floor = 0.01,
+                 min_weight = 0.1, 
+                 max_weight = 5.0,
+                 normalize = True, 
+                 eps = 1e-8,
+                 ):
+        
+        self.tasks = tasks
+
+        # Initialise all weights to 1.0
+        self.weights = {task: 1.0 for task in tasks}
+
+        self.ema_beta = ema_beta
+        self.power = power
+        self.floor = floor
+        self.min_weight = min_weight
+        self.max_weight = max_weight
+        self.normalize = normalize
+        self.eps = eps
+
+        # Store EMA of accuracies (None until first update)
+        self._acc_ema = {task:0.0 for task in self.tasks}
+
+    def update_weights(self, task_accs):
+        """
+        Updates weights based on the lates validation acc in [0,1]. 
+        Tasks with 100% acc get near zero weight.
+        """
+
+        # Updae EMA + compute raw weights
+        raw_weights = {}
+        for task in self.tasks:
+
+            if task not in task_accs:
+                raw_weights[task] = self.weights[task]
+                continue
+
+            acc = task_accs[task]
+
+            # Convert tensors / np scalars to float
+            try:
+                acc = float(acc)
+            
+            except Exception:
+                acc = float(acc.item())
+
+            # Saftey clamp acc to [0, 1]
+            if acc < 0.0: acc = 0.0
+            elif acc > 1.0: acc = 1.0
+
+            prev = self._acc_ema[task]
+            ema = self.ema_beta * prev + (1.0 - self.ema_beta) * acc
+            
+            self._acc_ema[task] = ema
+
+            weight = (1.0 - ema) ** self.power + self.floor
+
+            # Clamp Weight
+            if weight < self.min_weight: weight = self.min_weight
+            elif weight > self.max_weight: weight = self.max_weight
+
+            raw_weights[task] = weight
+
+        if self.normalize and len(raw_weights) > 0:
+            mean_weight = sum(raw_weights.values()) / max(len(raw_weights), 1)
+            scale = 1.0 / (mean_weight + self.eps)
+
+            for task in self.tasks:
+                raw_weights[task] *= scale
+
+        self.weights = raw_weights 
+            
+    def get_weighted_loss(self, task_losses):
+
+        total_weighted_loss = 0
+        for task, loss in task_losses.items():
+
+            weight = self.weights.get(task, 1.0)
+            total_weighted_loss += weight * loss
+
+        return total_weighted_loss
+    
+    def get_weights_dict(self):
+        return {task: float(w) for task, w in self.weights.items()}

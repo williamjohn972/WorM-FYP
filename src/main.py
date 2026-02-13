@@ -19,9 +19,6 @@ def main():
     config = config_from_args(args)
     run(config)
 
-if __name__ == "__main__":
-    main()
-
 
 def run(config: Config):
     
@@ -89,8 +86,6 @@ def config_from_args(args):
     config.resumption_config.resume = args.resume
     config.resumption_config.resume_epoch = args.resume_epoch
 
-    config.execution_config.num_tasks = args.num_tasks
-
     config.model_config.img_size = args.img_size
     config.model_config.resize_img_size = args.resize_img_size
     config.model_config.num_input_channels = args.num_input_channels
@@ -115,3 +110,6 @@ def config_from_args(args):
     config.optimization_config.use_extracted_feats = args.use_extracted_feats
 
     return config
+
+if __name__ == "__main__":
+    main()
