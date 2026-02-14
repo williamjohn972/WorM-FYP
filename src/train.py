@@ -61,7 +61,7 @@ class Trainer():
                                                                        factor = 0.8, 
                                                                        patience = 3, 
                                                                     #    verbose = True,
-                                                                    #    threshold = 0.005
+                                                                       threshold = 0.005
                                                                        )
 
         # Create the Loss Criterias 
