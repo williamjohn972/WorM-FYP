@@ -105,6 +105,11 @@ def config_from_args(args):
     config.train_config.num_epochs = args.num_epochs
     config.train_config.samples_per_task = args.samples_per_task
     config.train_config.test_interval = args.test_interval
+    config.train_config.use_dynamic_loss = args.use_dynamic_loss
+    config.train_config.dynamic_update_every = args.dynamic_update_every
+    config.train_config.dynamic_max_change_ratio = args.dynamic_max_change_ratio
+    config.train_config.use_amp = args.use_amp
+    config.train_config.grad_clip_norm = args.grad_clip_norm
 
     config.optimization_config.num_workers = args.num_workers
     config.optimization_config.use_extracted_feats = args.use_extracted_feats

@@ -2,6 +2,7 @@ from enum import Enum
 import torch
 from src.tasks import Tasks
 from src.model import Show_Task
+from typing import Optional, Dict
 
 class Modes(Enum):
 
@@ -357,6 +358,8 @@ class Dynamic_Weight_Balancer():
                  max_weight = 5.0,
                  normalize = True, 
                  eps = 1e-8,
+                 update_every = 3, # prevents thrashing
+                 max_change_ratio = 0.2, # caps weight change per update and prevents suddent jumps
                  ):
         
         self.tasks = tasks
@@ -372,14 +375,23 @@ class Dynamic_Weight_Balancer():
         self.normalize = normalize
         self.eps = eps
 
+        self.update_every = update_every
+        self.update_counter = 0
+
+        self.max_change_ratio = max_change_ratio
+
         # Store EMA of accuracies (None until first update)
-        self._acc_ema = {task:0.0 for task in self.tasks}
+        self._acc_ema: Dict[Tasks, Optional[float]] = {task:None for task in self.tasks}
 
     def update_weights(self, task_accs):
         """
         Updates weights based on the lates validation acc in [0,1]. 
         Tasks with 100% acc get near zero weight.
         """
+
+        self.update_counter += 1
+        if self.update_counter % self.update_every != 0:
+            return 
 
         # Updae EMA + compute raw weights
         raw_weights = {}
@@ -403,7 +415,9 @@ class Dynamic_Weight_Balancer():
             elif acc > 1.0: acc = 1.0
 
             prev = self._acc_ema[task]
-            ema = self.ema_beta * prev + (1.0 - self.ema_beta) * acc
+            ema = acc if prev is None else (
+                self.ema_beta * prev + (1.0 - self.ema_beta) * acc
+            )
             
             self._acc_ema[task] = ema
 
@@ -421,6 +435,20 @@ class Dynamic_Weight_Balancer():
 
             for task in self.tasks:
                 raw_weights[task] *= scale
+
+        if self.max_change_ratio is not None:
+            for task in self.tasks:
+                old = float(self.weights.get(task, 1.0))
+                new = float(raw_weights.get(task, old))
+
+                low = old * (1.0 - self.max_change_ratio)
+                high = old * (1.0 + self.max_change_ratio)
+
+                # clamp per-update movement
+                if new < low: new = low
+                elif new > high: new = high
+
+                raw_weights[task] = new
 
         self.weights = raw_weights 
             

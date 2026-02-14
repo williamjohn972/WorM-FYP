@@ -101,12 +101,25 @@ class TrainConfig:
         num_epochs=200,
         samples_per_task=1200,
         test_interval=5,
+
+        use_dynamic_loss = False,
+        dynamic_update_every = 3,
+        dynamic_max_change_ratio = 0.2,
+
+
+        use_amp = False,
+        grad_clip_norm = 0.0,
     ):
         self.lr = lr
         self.batch_size = batch_size
         self.num_epochs = num_epochs
         self.samples_per_task = samples_per_task
         self.test_interval = test_interval
+        self.use_dynamic_loss = use_dynamic_loss
+        self.dynamic_update_every = dynamic_update_every
+        self.dynamic_max_change_ratio = dynamic_max_change_ratio
+        self.use_amp = use_amp
+        self.grad_clip_norm = grad_clip_norm
 
 class OptimizationConfig:
     def __init__(

@@ -61,7 +61,8 @@ class Trainer():
                                                                        factor = 0.8, 
                                                                        patience = 3, 
                                                                     #    verbose = True,
-                                                                       threshold = 0.005)
+                                                                    #    threshold = 0.005
+                                                                       )
 
         # Create the Loss Criterias 
         self.bce_criterion = nn.BCEWithLogitsLoss()
@@ -69,11 +70,18 @@ class Trainer():
 
         
         # Dynamic Weight Balancer 
-        self.balancer = Dynamic_Weight_Balancer(self.task_list)
+        self.use_dynamic_loss = config.train_config.use_dynamic_loss
+        self.balancer = Dynamic_Weight_Balancer(tasks=self.task_list,
+                                                max_change_ratio=self.config.train_config.dynamic_max_change_ratio,
+                                                update_every=self.config.train_config.dynamic_update_every
+                                                ) if self.use_dynamic_loss else None
 
         # Amp and Scaler 
-        self.use_amp = (self.device.startswith("cuda"))
+        self.use_amp = self.config.train_config.use_amp and self.device.startswith("cuda")
         self.scaler = torch.cuda.amp.GradScaler(enabled=self.use_amp)
+
+        # Grad Clip
+        self.grad_clip_norm = self.config.train_config.grad_clip_norm
 
     def _make_checkpoint_payload(
         self,
@@ -408,7 +416,7 @@ class Trainer():
 
             # For Task Loss Weight Balancing 
             # Use the balancer to producde the final multitask loss for backprop
-            if is_train_mode:
+            if is_train_mode and self.balancer:
                 multitask_loss_this_step = self.balancer.get_weighted_loss(task_loss_tensors)
 
             else:
@@ -424,22 +432,38 @@ class Trainer():
                 # torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 # self.optimizer.step()
 
-                self.scaler.scale(multitask_loss_this_step).backward()
+                if self.use_amp:
+                    self.scaler.scale(multitask_loss_this_step).backward()
+                    # unscale before clipping
+                    self.scaler.unscale_(self.optimizer)
 
-                # unscale before clipping
-                self.scaler.unscale_(self.optimizer)
-                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+                    if self.grad_clip_norm > 0:
+                        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=self.grad_clip_norm)
+                    
+                    self.scaler.step(self.optimizer)
+                    self.scaler.update()
 
-                self.scaler.step(self.optimizer)
-                self.scaler.update()
-        
+                else:
+                    multitask_loss_this_step.backward()
+                    
+                    if self.grad_clip_norm > 0:
+                        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=self.grad_clip_norm)
+                    
+                    self.optimizer.step()
+
+                
             # Track epoch level multitask loss
             # average accross tasks at the epoch level
             # divide this steps summed loss by number of tasks
-            # multitask_loss_sum += float(multitask_loss_this_step.detach().item()) / max(1, len(self.task_list))
-            # multitask_loss_sum += multitask_loss_this_step.detach().item()
+            loss = float(multitask_loss_this_step.detach().item())
             # Changedthe form becuase of our weight balancing
-            multitask_loss_sum += float(multitask_loss_this_step.detach().item()) 
+            if self.use_dynamic_loss and self.balancer:
+                multitask_loss_sum +=  loss / max(1e-8,sum(self.balancer.weights.values()))
+
+            else:
+                multitask_loss_sum += loss / len(self.task_list) 
+
+            # multitask_loss_sum += multitask_loss_this_step.detach().item()
             num_steps += 1
 
 
@@ -499,12 +523,13 @@ class Trainer():
 
             # Task Loss Weight Balancing 
             # Update weights using the validation accuracies 
-            self.balancer.update_weights(val_task_acc_dict)
+            if self.balancer:
+                self.balancer.update_weights(val_task_acc_dict)
 
-            if self.logger:
-                self.logger.info(f"Loss weights: " + ", ".join(
-                    [f"{t.value}:{self.balancer.weights[t]:.3f}" for t in self.task_list]
-                ))
+                if self.logger:
+                    self.logger.info(f"Loss weights: " + ", ".join(
+                        [f"{t.value}:{self.balancer.weights[t]:.3f}" for t in self.task_list]
+                    ))
 
             if hasattr(self, "lr_scheduler") and self.lr_scheduler is not None:
                 self.lr_scheduler.step(val_multitask_loss)

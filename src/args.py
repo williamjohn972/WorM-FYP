@@ -44,6 +44,14 @@ def build_parser():
     parser.add_argument("--samples_per_task", type=int, default=4800)
     parser.add_argument("--test_interval", type=int, default=5)
 
+    parser.add_argument("--use_dynamic_loss", action="store_true")
+    parser.add_argument("--dynamic_update_every", type=int, default=3)
+    parser.add_argument("--dynamic_max_change_ratio", type=float, default=0.2)
+
+    parser.add_argument("--use_amp", action="store_true")
+    parser.add_argument("--grad_clip_norm", type=float, default=0.0)
+
+
 
     # Optimization Config
     parser.add_argument("--gpu", type=int, default=0)
