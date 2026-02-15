@@ -88,7 +88,9 @@ class Spatial_Integration_Generator(Generator):
 
         assert self.train_num_samples % len(part_size_options) == 0
         assert self.test_num_samples % len(part_size_options)== 0
-        assert self.gen_test_num_samples % len(held_out_part_size_options) == 0
+
+        if self.held_out_part_size_options:
+            assert self.gen_test_num_samples % len(held_out_part_size_options) == 0
 
         assert self.max_retries > max(pattern_size_options)
             
@@ -102,11 +104,12 @@ class Spatial_Integration_Generator(Generator):
             for grid_size in grid_size_options
         ])
 
-        assert all([
-            pattern_size < grid_size ** 2 
-            for pattern_size in held_out_pattern_size_options
-            for grid_size in held_out_grid_size_options
-        ])
+        if self.held_out_pattern_size_options or self.held_out_grid_size_options:
+            assert all([
+                pattern_size < grid_size ** 2 
+                for pattern_size in held_out_pattern_size_options
+                for grid_size in held_out_grid_size_options
+            ])
 
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, Tasks.SPATIAL_INTEGRATION.name.lower())

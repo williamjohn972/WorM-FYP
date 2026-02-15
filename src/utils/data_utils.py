@@ -4,14 +4,14 @@ from torch.utils.data import DataLoader, random_split
 from src.tasks import Tasks
 
 CHANGE_DETECTION_COMMON_MAP = dict(
-    set_size_options=[2, 4, 6, 8, 10, 12], held_out_set_size_options=[2, 4, 6, 8, 10, 12],
-    retention_interval_options=[0, 6, 12, 18], held_out_retention_interval_options=[0, 6, 12, 18],
+    set_size_options=[2, 4, 6, 8, 10, 12], held_out_set_size_options=[],
+    retention_interval_options=[0, 6, 12, 18], held_out_retention_interval_options=[],
 )
 
 VISUAL_SERIAL_TASK_COMMON_MAP = dict(
     grid_size = 6,
     list_length_options=[2, 3, 4, 5, 6, 7, 8, 9],
-    held_out_list_length_options=[2, 3, 4, 5, 6, 7, 8, 9],
+    held_out_list_length_options=[],
 )
 
 TASK_DATASET_MAP = {
@@ -36,41 +36,40 @@ TASK_SPECS_MAP = {
     
     Tasks.SPATIAL_COORDINATION: dict(
         grid_size = 10,                 
-        list_length_options=[10, 12, 14, 16, 18], held_out_list_length_options = [10, 12, 14, 16, 18],        
-        symetry_offset_options=[2,4,6,8],    
-        held_out_symetry_offset_options=[2,4,6,8]
+        list_length_options=[10, 12, 14, 16, 18], held_out_list_length_options = [],        
+        symetry_offset_options=[2,4,6,8], held_out_symetry_offset_options=[]
     ),
 
     Tasks.SPATIAL_FREE_RECALL: dict(
         grid_size=10, 
         set_size_options=[30], list_length_options=[1,2,3,4,5,6,7,8,10,12,15,18],
-        held_out_set_size_options=[30], held_out_list_length_options=[1,2,3,4,5,6,7,8,10,12,15,18],
+        held_out_set_size_options=[], held_out_list_length_options=[],
     ), 
 
     Tasks.SPATIAL_INTEGRATION: dict(
-        grid_size_options=[4], held_out_grid_size_options=[4],
-        pattern_size_options=[12], held_out_pattern_size_options=[12],
-        part_size_options=[1,2,3,4,6,12], held_out_part_size_options=[1,2,3,4,6,12],
-        distractor_difference_options=[1,2,3,4], held_out_distractor_difference_options=[1,2,3,4],
+        grid_size_options=[4], held_out_grid_size_options=[],
+        pattern_size_options=[12], held_out_pattern_size_options=[],
+        part_size_options=[1,2,3,4,6,12], held_out_part_size_options=[],
+        distractor_difference_options=[1,2,3,4], held_out_distractor_difference_options=[],
         max_retries=50,
     ),
 
     Tasks.SPATIAL_MEMORY_UPDATING: dict(
         grid_size=3,
-        set_size_options=[1, 2, 3, 4, 5, 6, 7, 8], held_out_set_size_options=[1, 2, 3, 4, 5, 6, 7, 8],
+        set_size_options=[1, 2, 3, 4, 5, 6, 7, 8], held_out_set_size_options=[],
         num_updates_options=[8], presentation_time_options=[1],
     ),
 
     Tasks.SPATIAL_TASK_SWITCHING: dict(
         trial_length_options=[20],
-        held_out_trial_length_options=[20],
+        held_out_trial_length_options=[],
         variant=STS_Variant.CUED,
     ), 
 
     Tasks.VISUAL_ITEM_RECOGNITION: dict(
         grid_size=6,
         list_length_options=[4, 6, 8, 10], retention_intervals_options=[0, 2, 4, 5, 6],
-        held_out_list_length_options=[4, 6, 8, 10], held_out_retention_intervals_options=[0, 2, 4, 5, 6],
+        held_out_list_length_options=[], held_out_retention_intervals_options=[],
         distractor_diff_options=[4],
     ),
 
@@ -184,12 +183,12 @@ def build_dataloaders(config):
         dataset = datasets[task]
 
         dataloaders[task] = {
-            "train": DataLoader(dataset["train"], shuffle=True, drop_last=True, batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers),
-            "val": DataLoader(dataset["val"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers),
-            "test": DataLoader(dataset["test"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers),
+            "train": DataLoader(dataset["train"], shuffle=True, drop_last=True, batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers, persistent_workers=True, pin_memory=True),
+            "val": DataLoader(dataset["val"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers, persistent_workers=True, pin_memory=True),
+            "test": DataLoader(dataset["test"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers, persistent_workers=True, pin_memory=True),
         }
 
         if config.execution_config.gen_test:
-            dataloaders[task]["gen_test"] = DataLoader(dataset["gen_test"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers)
+            dataloaders[task]["gen_test"] = DataLoader(dataset["gen_test"], shuffle=False, drop_last=False,batch_size=config.train_config.batch_size, num_workers=config.optimization_config.num_workers, persistent_workers=True, pin_memory=True)
 
     return dataloaders

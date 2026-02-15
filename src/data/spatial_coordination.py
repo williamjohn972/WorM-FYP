@@ -26,7 +26,7 @@ class Spatial_Coordination_Generator(Generator):
                  grid_size:int, img_size:int,
                  num_samples:int,
                  list_length_options:List[int], held_out_list_length_options:List[int],
-                 symetry_offset_options:List[int], held_out_symetry_offset_options = None, 
+                 symetry_offset_options:List[int], held_out_symetry_offset_options:List[int], 
                  data_dir:str="",save:bool=True, generate_trials=True):
         
         self.config = Config()
@@ -51,24 +51,34 @@ class Spatial_Coordination_Generator(Generator):
         assert self.grid_size % 2 == 0 # Grid size must be even for left right symetry
 
         assert all(list_length % 2 == 0 for list_length in self.list_length_options) # List Lengths must be even
-        assert all(list_length % 2 == 0 for list_length in self.held_out_list_length_options) # List Lengths must be even
+        
+        if self.held_out_list_length_options:
+            assert all(list_length % 2 == 0 for list_length in self.held_out_list_length_options) # List Lengths must be even
+            assert max(self.held_out_list_length_options) <= self.grid_size**2 # List length cannot exceed number of grid cells
 
         assert max(self.list_length_options) <= self.grid_size**2 # List length cannot exceed number of grid cells
-        assert max(self.held_out_list_length_options) <= self.grid_size**2 # List length cannot exceed number of grid cells
 
         assert all(opt % 2== 0 for opt in symetry_offset_options)
+
+        if self.held_out_symetry_offset_options:
+            assert all(opt % 2== 0 for opt in held_out_symetry_offset_options)
+
         
         for sym_off in symetry_offset_options:
-
             for list_length in list_length_options:
                 assert(sym_off <= list_length)
 
-            for list_length in held_out_list_length_options:
-                assert(sym_off <= list_length)
+
+        if self.held_out_symetry_offset_options or self.held_out_list_length_options:
+            for sym_off in self.held_out_symetry_offset_options:
+                for list_length in held_out_list_length_options:
+                    assert(sym_off <= list_length)
 
         assert self.train_num_samples % len(list_length_options) == 0
         assert self.test_num_samples % len(list_length_options)== 0
-        assert self.gen_test_num_samples % len(held_out_list_length_options) == 0
+
+        if self.held_out_list_length_options:
+            assert self.gen_test_num_samples % len(held_out_list_length_options) == 0
             
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, Tasks.SPATIAL_COORDINATION.name.lower())

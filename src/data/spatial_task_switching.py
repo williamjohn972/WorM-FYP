@@ -116,7 +116,9 @@ class Spatial_Task_Switching_Generator(Generator):
         # Assertions
         assert self.train_num_samples % len(trial_length_options) == 0
         assert self.test_num_samples % len(trial_length_options) == 0
-        assert self.gen_test_num_samples % len(held_out_trial_length_options) == 0
+
+        if self.held_out_trial_length_options:
+            assert self.gen_test_num_samples % len(held_out_trial_length_options) == 0
             
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, f"{Tasks.SPATIAL_TASK_SWITCHING.name.lower()} - {variant.value.lower()}")

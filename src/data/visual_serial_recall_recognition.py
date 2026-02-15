@@ -62,7 +62,7 @@ class Visual_Serial_Task_Generator(Generator):
         self.distractor_diff_options = distractor_diff_options
 
         self.held_out_list_length_options = held_out_list_length_options
-        self.held_out_distractor_diff_options = distractor_diff_options
+        self.held_out_distractor_diff_options = self.held_out_distractor_diff_options
 
         self.train_num_samples = num_samples 
         self.test_num_samples = (int) (num_samples * 0.1)
@@ -74,21 +74,12 @@ class Visual_Serial_Task_Generator(Generator):
         # Assertions
         assert self.train_num_samples % len(list_length_options) == 0
         assert self.test_num_samples % len(list_length_options) == 0
-        assert self.gen_test_num_samples % len(held_out_list_length_options) == 0
-
         max_list_length = max(self.list_length_options)
-        held_out_max_list_length = max(self.held_out_list_length_options)
-        
+
         assert (
             (max_list_length % 2 == 0 or 
              max_list_length == int(math.sqrt(max_list_length)) ** 2)
              and (max_list_length >= 4)
-        )
-
-        assert (
-            (held_out_max_list_length % 2 == 0 or 
-             held_out_max_list_length == int(math.sqrt(max_list_length)) ** 2)
-             and (held_out_max_list_length >= 4)
         )
 
         assert all(
@@ -96,10 +87,21 @@ class Visual_Serial_Task_Generator(Generator):
             for distractor_diff in self.distractor_diff_options
         )
 
-        assert all(
-            distractor_diff % 2 == 0
-            for distractor_diff in self.held_out_distractor_diff_options
-        )
+        if self.held_out_list_length_options:
+            assert self.gen_test_num_samples % len(held_out_list_length_options) == 0
+            held_out_max_list_length = max(self.held_out_list_length_options)
+        
+            assert (
+                (held_out_max_list_length % 2 == 0 or 
+                held_out_max_list_length == int(math.sqrt(max_list_length)) ** 2)
+                and (held_out_max_list_length >= 4)
+            )
+
+        if self.held_out_distractor_diff_options:
+            assert all(
+                distractor_diff % 2 == 0
+                for distractor_diff in self.held_out_distractor_diff_options
+            )
 
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, f"{self.task_name.name.lower()}")

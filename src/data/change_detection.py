@@ -92,7 +92,8 @@ class Change_Detection_Generator(Generator):
         # Assertions
         assert self.train_num_samples % len(set_size_options) == 0
         assert self.test_num_samples % len(set_size_options) == 0
-        assert self.gen_test_num_samples % len(held_out_set_size_options) == 0
+        if held_out_set_size_options:
+            assert self.gen_test_num_samples % len(held_out_set_size_options) == 0
             
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, f"{Tasks.CHANGE_DETECTION.name.lower()} - {self.variant.value.lower()}")
