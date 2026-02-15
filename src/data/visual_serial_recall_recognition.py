@@ -62,7 +62,6 @@ class Visual_Serial_Task_Generator(Generator):
         self.distractor_diff_options = distractor_diff_options
 
         self.held_out_list_length_options = held_out_list_length_options
-        self.held_out_distractor_diff_options = self.held_out_distractor_diff_options
 
         self.train_num_samples = num_samples 
         self.test_num_samples = (int) (num_samples * 0.1)
@@ -97,11 +96,6 @@ class Visual_Serial_Task_Generator(Generator):
                 and (held_out_max_list_length >= 4)
             )
 
-        if self.held_out_distractor_diff_options:
-            assert all(
-                distractor_diff % 2 == 0
-                for distractor_diff in self.held_out_distractor_diff_options
-            )
 
         if self.save:
             self.train_dir, self.test_dir, self.gen_test_dir = self._init_dirs(self.data_dir, f"{self.task_name.name.lower()}")
@@ -127,7 +121,7 @@ class Visual_Serial_Task_Generator(Generator):
 
             else:
                 list_length_options = self.held_out_list_length_options
-                distractor_diff_options = self.held_out_distractor_diff_options
+                distractor_diff_options = self.distractor_diff_options
 
             # Each Combination is (set_size, presentation_time)
             total_trial_samples = getattr(self, f"{trial_type}_num_samples")
