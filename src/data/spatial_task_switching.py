@@ -145,7 +145,7 @@ class Spatial_Task_Switching_Generator(Generator):
 
             # Each Combination is (set_size, presentation_time)
             total_trial_samples = getattr(self, f"{trial_type}_num_samples")
-            total_trial_samples_per_combination = total_trial_samples // len(trial_length_options)
+            total_trial_samples_per_combination = total_trial_samples // max(1,len(trial_length_options))
             
             cur_total_trial_samples = 0
             cur_trial_samples_per_combination = {}

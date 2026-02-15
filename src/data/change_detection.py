@@ -121,7 +121,7 @@ class Change_Detection_Generator(Generator):
 
             # Each Combination is (set_size, retention_interval)
             total_trial_samples = getattr(self, f"{trial_type}_num_samples")
-            total_trial_samples_per_combination = total_trial_samples // (len(self.set_size_options) * len(self.retention_interval_options))
+            total_trial_samples_per_combination = total_trial_samples // max(1,(len(self.set_size_options) * len(self.retention_interval_options)))
             
             cur_total_trial_samples = 0
             cur_trial_samples_per_combination = {}

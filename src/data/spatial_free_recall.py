@@ -92,7 +92,7 @@ class Spatial_Free_Recall_Generator(Generator):
             num_samples = getattr(self, f"{trial_type}_num_samples")
 
             # Compute Number of trials per condition
-            num_samples_per_condition = num_samples // (len(set_size_options) * len(list_length_options))
+            num_samples_per_condition = num_samples // max(1,(len(set_size_options) * len(list_length_options)))
             per_condition_sample_count = {}
             overall_sample_count = 0
 

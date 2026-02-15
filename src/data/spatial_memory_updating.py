@@ -106,7 +106,7 @@ class Spatial_Memory_Updating_Generator(Generator):
 
             # Each Combination is (set_size, presentation_time)
             total_trial_samples = getattr(self, f"{trial_type}_num_samples")
-            total_trial_samples_per_combination = total_trial_samples // (len(set_size_options) * len(self.presentation_time_options))
+            total_trial_samples_per_combination = total_trial_samples // max(1,(len(set_size_options) * len(self.presentation_time_options)))
             
             cur_total_trial_samples = 0
             cur_trial_samples_per_combination = {}

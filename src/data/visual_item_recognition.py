@@ -98,7 +98,7 @@ class Visual_Item_Recognition_Generator(Generator):
             # Split Total Num of Samples Generated between all possible Combinations
             num_possible_combinations = len(list_length_options) * len(retention_interval_opions)
             total_trial_samples = getattr(self, f"{trial_type}_num_samples")
-            total_trial_samples_per_combination = total_trial_samples // (num_possible_combinations)
+            total_trial_samples_per_combination = total_trial_samples // max(1,(num_possible_combinations))
             
             
             # We need to Loop over every single combination
