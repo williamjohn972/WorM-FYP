@@ -591,23 +591,30 @@ class Trainer():
                 print_log(self.logger, val_task_acc_dict, prefix="Val Acc")
                 print_log(self.logger, val_task_loss_dict, prefix="Val Loss")
 
+            # Save History to JSON
+            epoch_metrics = {
+                "epoch": epoch,
+                "train_multitask_loss": float(train_multitask_loss),
+                "train_task_loss": {t.value: float(v) for t, v in train_task_loss_dict.items()},
+                "val_multitask_loss": float(val_multitask_loss),
+                "val_task_loss": {t.value: float(v) for t, v in val_task_loss_dict.items()},
+                "val_task_acc": {t.value: float(v) for t, v in val_task_acc_dict.items()}
+            }
 
-            # # TEST best model in regular intervals
-            # if epoch % self.config.train_config.test_interval == 0:
-            #     results, test_detailed_acc, gen_test_detailed_acc = self.test(epoch=epoch, checkpoint_fname="best.pt")
-                
-            #     test_folder = os.path.join(self.config.path_config.output_folder, "test")
-            #     os.makedirs(test_folder, exist_ok=True)
+            history_file = os.path.join(self.config.path_config.output_folder, "train_history.json")
 
-            #     with open(os.path.join(test_folder, "best_results.json"), "w") as f:
-            #         json.dump(results,f)
+            if os.path.exists(history_file):
+                with open(history_file, "r") as f:
+                    history = json.load(f)
+            else:
+                history = []
 
-            #     with open(os.path.join(test_folder, "best_test_detailed_acc.json"), "w") as f:
-            #         json.dump(test_detailed_acc,f)
+            history.append(epoch_metrics)
+            with open(history_file, "w") as f:
+                json.dump(history, f)
 
-            #     if gen_test_detailed_acc is not None:
-            #         with open(os.path.join(test_folder, "best_gen_test_detailed_acc.json"), "w") as f:
-            #             json.dump(gen_test_detailed_acc, f)
+            if self.logger:
+                self.logger.info(f"Metrics for epoch {epoch} saved to {history_file}")
 
 
         if hasattr(self, "logger") and self.logger:
