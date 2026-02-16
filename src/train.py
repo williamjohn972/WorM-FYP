@@ -513,6 +513,8 @@ class Trainer():
             if hasattr(self, "logger") and self.logger:
                 self.logger.info("=" * 60)
                 self.logger.info(f"Epoch {epoch} / {self.config.train_config.num_epochs}")
+                current_lr = self.optimizer.param_groups[0]["lr"]
+                self.logger.info(f"Current LR: {current_lr:.8f}")
 
             # Train
             train_multitask_loss, train_task_loss_dict, _, _ = self._run_one_epoch(mode=Modes.TRAIN, loaders=train_loaders, epoch_num=epoch)
