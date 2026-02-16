@@ -603,8 +603,8 @@ class Trainer():
                 "val_task_acc": {t.value: float(v) for t, v in val_task_acc_dict.items()}
             }
 
+            os.makedirs(self.config.path_config.output_folder, exist_ok=True)
             history_file = os.path.join(self.config.path_config.output_folder, "train_history.json")
-
             if os.path.exists(history_file):
                 with open(history_file, "r") as f:
                     history = json.load(f)
