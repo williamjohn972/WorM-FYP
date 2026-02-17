@@ -590,8 +590,9 @@ class Trainer():
                     f"Best Epoch: {best_epoch} Best ValLoss: {best_val_loss:.4f}"
                 )
 
-                print_log(self.logger, val_task_acc_dict, prefix="Val Acc")
+                print_log(self.logger, train_task_loss_dict, prefix="Train Loss")
                 print_log(self.logger, val_task_loss_dict, prefix="Val Loss")
+                print_log(self.logger, val_task_acc_dict, prefix="Val Acc")
 
             # Save History to JSON
             epoch_metrics = {
