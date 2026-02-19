@@ -58,10 +58,10 @@ class Trainer():
         # Create the Scheduler
         self.lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = self.optimizer, 
                                                                        mode = "min", 
-                                                                       factor = 0.8, 
-                                                                       patience = 3, 
+                                                                       factor = self.config.train_config.lr_factor, 
+                                                                       patience = self.config.train_config.lr_patience, 
                                                                     #    verbose = True,
-                                                                       threshold = 0.005
+                                                                       threshold = self.config.train_config.lr_threshold,
                                                                        )
 
         # Create the Loss Criterias 

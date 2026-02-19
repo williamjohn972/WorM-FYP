@@ -39,6 +39,10 @@ def build_parser():
 
     # Train Config
     parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--lr_factor", type=float, default=0.8)
+    parser.add_argument("--lr_patience", type=int, default= 3)
+    parser.add_argument("--lr_threshold", type=float, default=0.005)
+
     parser.add_argument("--batch_size", type=int, default=10)
     parser.add_argument("--num_epochs", type=int, default=200)
     parser.add_argument("--samples_per_task", type=int, default=4800)

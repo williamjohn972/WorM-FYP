@@ -97,6 +97,10 @@ class TrainConfig:
     def __init__(
         self,
         lr=1e-4,
+        lr_factor = 0.8,
+        lr_patience = 3,
+        lr_threshold = 0.005,
+
         batch_size=10,
         num_epochs=200,
         samples_per_task=1200,
@@ -111,6 +115,9 @@ class TrainConfig:
         grad_clip_norm = 0.0,
     ):
         self.lr = lr
+        self.lr_factor = lr_factor
+        self.lr_patience = lr_patience
+        self.lr_threshold = lr_threshold
         self.batch_size = batch_size
         self.num_epochs = num_epochs
         self.samples_per_task = samples_per_task

@@ -101,6 +101,9 @@ def config_from_args(args):
     config.model_config.projection_type = projection_type
 
     config.train_config.lr = args.lr
+    config.train_config.lr_factor = args.lr_factor
+    config.train_config.lr_patience = args.lr_patience
+    config.train_config.lr_threshold = args.lr_threshold
     config.train_config.batch_size = args.batch_size
     config.train_config.num_epochs = args.num_epochs
     config.train_config.samples_per_task = args.samples_per_task
