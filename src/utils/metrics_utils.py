@@ -114,8 +114,8 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
 
         acc = epoch_acc_sum / max(1, total_epoch_steps)
 
-        # if task == Tasks.SPATIAL_FREE_RECALL:
-        #     acc = acc / 100.0
+        if task == Tasks.SPATIAL_FREE_RECALL:
+            acc = acc / 100.0
 
         metrics["acc"] = acc
 
