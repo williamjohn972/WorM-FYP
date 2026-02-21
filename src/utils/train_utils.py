@@ -21,7 +21,7 @@ class LossType(Enum):
     CATEGORICAL = "categorical"
 
 class Specs(Enum):
-    SYMETRY_OFFSET = "symetric_offset"
+    SYMETRY_OFFSET = "symetry_offset"
     PART_SIZE = "part_size"
     SET_SIZE = "set_size"
     SERIAL_POSITION = "serial_position"
