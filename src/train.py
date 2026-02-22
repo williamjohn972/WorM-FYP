@@ -52,8 +52,9 @@ class Trainer():
         self.task_list = config.task_config.task_list
 
         # Create the Optimizer 
-        self.optimizer = torch.optim.Adam(params = model.parameters(), 
-                                          lr = config.train_config.lr)
+        self.optimizer = torch.optim.AdamW(params = model.parameters(), 
+                                          lr = config.train_config.lr,
+                                          weight_decay=self.config.train_config.weight_decay)
 
         # Create the Scheduler
         self.lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = self.optimizer, 

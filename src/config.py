@@ -100,6 +100,7 @@ class TrainConfig:
         lr_factor = 0.8,
         lr_patience = 3,
         lr_threshold = 0.005,
+        weight_decay = 0,
 
         batch_size=10,
         num_epochs=200,
@@ -118,6 +119,7 @@ class TrainConfig:
         self.lr_factor = lr_factor
         self.lr_patience = lr_patience
         self.lr_threshold = lr_threshold
+        self.weight_decay = weight_decay
         self.batch_size = batch_size
         self.num_epochs = num_epochs
         self.samples_per_task = samples_per_task
