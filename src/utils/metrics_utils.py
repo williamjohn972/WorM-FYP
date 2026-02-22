@@ -17,7 +17,7 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
 
         # convert the entire batch to predictions first, shape --> (B,T, ..)
         if loss_type == LossType.BINARY:
-            full_pred = (torch.sigmoid(logits_seq) >= 0.5).float()
+            full_pred = (torch.round(torch.sigmoid(logits_seq))).float()
         else:
             full_pred = torch.argmax(logits_seq, dim = -1)
 
@@ -36,7 +36,7 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                 if meta.get("multi_label", False):   # SFR
                     sample_gt = batch["gt"][i]       # (100,)
                 else:
-                    sample_gt = batch["gt"][i, idx]
+                    sample_gt = batch["gt"][i, idx].unsqueeze(0)
 
             elif read_type == ReadType.TAIL:
                 k = int(batch[meta["k_from"].value][i].item())

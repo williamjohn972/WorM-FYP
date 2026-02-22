@@ -180,7 +180,7 @@ LOSS_FN_MAP = {
 }
 
 PRED_FN_MAP = {
-  LossType.BINARY: lambda logits: (torch.sigmoid(logits) >= 0.5),
+  LossType.BINARY: lambda logits: (torch.round(torch.sigmoid(logits))),
   LossType.CATEGORICAL: lambda logits: torch.argmax(logits, dim=-1),
 }
 
