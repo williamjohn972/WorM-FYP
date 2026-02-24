@@ -587,7 +587,7 @@ class Trainer():
                     f"Train Loss: {train_multitask_loss:.4f} | "
                     f"Val Loss: {val_multitask_loss:.4f} | "
                     f"Val Acc: {avg_val_acc:.4f} | "
-                    f"Best Epoch: {best_epoch} Best ValLoss: {best_val_loss:.4f}"
+                    f"Best Epoch: {best_epoch} Best ValAcc: {best_val_acc:.4f}"
                 )
 
                 print_log(self.logger, train_task_loss_dict, prefix="Train Loss")
