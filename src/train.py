@@ -541,8 +541,8 @@ class Trainer():
             avg_val_acc = sum(val_task_acc_dict.values()) / max(1, len(val_task_acc_dict))
 
             # Decide if this is the best epoch
-            # is_best = avg_val_acc > best_val_acc
-            is_best = val_multitask_loss < best_val_loss
+            is_best = avg_val_acc > best_val_acc
+            # is_best = val_multitask_loss < best_val_loss
             if is_best:
                 best_val_acc = avg_val_acc
                 best_val_loss = val_multitask_loss
