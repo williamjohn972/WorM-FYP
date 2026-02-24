@@ -62,6 +62,7 @@ class Trainer():
                                                                        patience = self.config.train_config.lr_patience, 
                                                                     #    verbose = True,
                                                                        threshold = self.config.train_config.lr_threshold,
+                                                                       min_lr= 5e-6
                                                                        )
 
         # Create the Loss Criterias 
