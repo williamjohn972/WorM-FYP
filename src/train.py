@@ -626,7 +626,7 @@ class Trainer():
                 f"Training complete. Best epoch={best_epoch}, best_val_acc={best_val_acc:.4f}, best_val_loss={best_val_loss:.4f}"
             )
 
-    def test(self, epoch, checkpoint_fname):
+    def test(self, epoch, checkpoint_fname, save=True):
 
         # Loads the checkpoint
         checkpoint_path = os.path.join(self.config.path_config.checkpoint_folder, checkpoint_fname)
@@ -645,6 +645,12 @@ class Trainer():
         
         test_multitask_loss, test_task_loss, test_task_acc, test_detailed_acc = self._run_one_epoch(mode= Modes.TEST, loaders=test_loaders, epoch_num=epoch)
         assert test_task_acc != None
+
+        if save:
+            os.makedirs(self.config.path_config.output_folder, exist_ok=True)
+            detailed_acc_file = os.path.join(self.config.path_config.output_folder, "test_acc_results.json")
+            with open(detailed_acc_file, "w") as f:
+                json.dump(test_detailed_acc, f)
 
         test_avg_acc = calc_acc(test_task_acc)
         results["test"] = {
@@ -666,11 +672,18 @@ class Trainer():
             self.logger.info(f"TEST | Multitask Loss: {test_multitask_loss:.4f} | Avg Task Acc: {test_avg_acc:.4f}")
             print_log(self.logger, test_task_acc, prefix="Test Acc")
 
+
         if self.config.execution_config.gen_test:
             gen_test_loaders = {task: self.loaders[task]["gen_test"] for task in self.task_list}
             gen_test_multitask_loss, gen_test_task_loss, gen_test_task_acc, gen_test_detailed_acc = self._run_one_epoch(mode= Modes.GEN_TEST, loaders=gen_test_loaders, epoch_num=epoch)
             gen_test_avg_acc = calc_acc(gen_test_task_acc)
             assert gen_test_task_acc != None
+
+            if save:
+                os.makedirs(self.config.path_config.output_folder, exist_ok=True)
+                detailed_acc_file = os.path.join(self.config.path_config.output_folder, "gen_test_acc_results.json")
+                with open(detailed_acc_file, "w") as f:
+                    json.dump(test_detailed_acc, f)
 
             results["gen_test"] = {
                 "multitask_loss": float(gen_test_multitask_loss),

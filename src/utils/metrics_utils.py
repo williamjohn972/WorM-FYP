@@ -102,7 +102,7 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
                         list_length=seq_len - 1
                     )
                     for key, correct in sfr_res.items():
-                        if key in ["Forward Order", "No Order"]:
+                        if key in ["Forward Order", "No Order", "First", "Last 4", "Error"]:
                             batch_results.append({
                                 "correct": float(correct),
                                 "metadata": {"condition": key.title()}
@@ -131,29 +131,74 @@ def compute_metrics(mode, loss_type, logits_seq, batch, batch_size, task):
 
 
 
-def compute_sfr_metrics(logits, recall_gt, list_length):
+# def compute_sfr_metrics(logits, recall_gt, list_length):
 
+#     # First we need to get the top K predictions from the model
+#     _, pred_idxs = torch.topk(logits, k = list_length, sorted = True)
+#     pred_idxs = pred_idxs.cpu()
+#     valid_gt = recall_gt[recall_gt != -1].cpu()
+
+#     # Now we check if the forward order matches 
+#     forward_order = torch.equal(pred_idxs, valid_gt)
+
+#     # Now we perform the no order check
+#     no_order = torch.equal(torch.sort(pred_idxs)[0], torch.sort(valid_gt)[0])
+
+#     output =  {
+#         "Forward Order": forward_order,
+#         "No Order": no_order,
+#         Specs.SERIAL_POSITION.value: []
+#     }
+
+#     for j in range(list_length):
+#         output[Specs.SERIAL_POSITION.value].append(bool(pred_idxs[j].item() == valid_gt[j].item()))
+
+#     return output
+
+def compute_sfr_metrics(logits, recall_gt, list_length):
+   
     # First we need to get the top K predictions from the model
-    _, pred_idxs = torch.topk(logits, k = list_length, sorted = True)
+    _, pred_idxs = torch.topk(logits, k=list_length, sorted=True)
     pred_idxs = pred_idxs.cpu()
+    
+    # Filter out padding (-1) from the ground truth
     valid_gt = recall_gt[recall_gt != -1].cpu()
 
-    # Now we check if the forward order matches 
+    # Forward Order: Confidence ranking matches presentation sequence
     forward_order = torch.equal(pred_idxs, valid_gt)
 
-    # Now we perform the no order check
+    # No Order: Correct set of items identified regardless of ranking
     no_order = torch.equal(torch.sort(pred_idxs)[0], torch.sort(valid_gt)[0])
 
-    output =  {
+    # First: Was the most confident prediction the first item presented?
+    first_item_correct = (pred_idxs[0] == valid_gt[0])
+    
+    # Error: Was the most confident prediction not in the list at all?
+    primary_error = (pred_idxs[0] not in valid_gt)
+
+    # Last 4 (Recency Effect): Was the first prediction one of the last 4 items?
+    last_4_correct = False
+    if list_length >= 4:
+        last_4_correct = (pred_idxs[0] in valid_gt[-4:])
+    elif list_length > 1:
+        # Fallback for shorter lists as per original logic
+        last_4_correct = (pred_idxs[0] in valid_gt[-(list_length-1):])
+
+    # Serial Position Curve Data
+    serial_pos_correct = []
+    for j in range(list_length):
+        # Item-wise recall: Was target j found anywhere in the Top-K?
+        item_was_recalled = (valid_gt[j] in pred_idxs)
+        serial_pos_correct.append(bool(item_was_recalled))
+
+    return {
         "Forward Order": forward_order,
         "No Order": no_order,
-        Specs.SERIAL_POSITION.value: []
+        "First": first_item_correct,
+        "Last 4": last_4_correct,
+        "Error": primary_error,
+        "serial_position": serial_pos_correct
     }
-
-    for j in range(list_length):
-        output[Specs.SERIAL_POSITION.value].append(bool(pred_idxs[j].item() == valid_gt[j].item()))
-
-    return output
 
 def calc_acc(task_acc_dict):
     avg_acc = sum(task_acc_dict.values()) / max(1, len(task_acc_dict))
