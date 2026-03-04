@@ -222,6 +222,13 @@ class Spatial_Task_Switching_Dataset(Task_Dataset):
                          data_generator_kwargs = data_generator_kwargs)
         
         self.gt_pad_token = 2
+
+        self.TASK_TO_INT = {
+            "cue_up_down": 2,
+            "cue_left_right": 2,
+            "up_down": 0,
+            "left_right": 1
+        }
         
         
     def __getitem__(self, index):
@@ -230,13 +237,16 @@ class Spatial_Task_Switching_Dataset(Task_Dataset):
 
         img_seq = []
         gt = []
+        task_order = []
 
         stim_fnames = trial["stim_fnames"]
         gt_list = trial["gt_order"]
+        task_list = trial["task_order"]
 
-        for fname, label in zip(stim_fnames, gt_list):
+        for fname, label, task in zip(stim_fnames, gt_list, task_list):
             img_seq.append(self.load_image(fname))
             gt.append(int(label))
+            task_order.append(self.TASK_TO_INT[task])
 
         # seq_len before padding
         img_seq, seq_len = self.pad_img_seq(img_seq)
@@ -244,7 +254,10 @@ class Spatial_Task_Switching_Dataset(Task_Dataset):
         # pad gtto max_seq_len 
         gt = self.pad_gt(gt, pad_token=self.gt_pad_token)
 
-        return img_seq, gt, seq_len
+        # pad task order as well
+        task_order = self.pad_gt(task_order, pad_token=self.gt_pad_token)
+
+        return img_seq, gt, seq_len, task_order
 
 
 class Spatial_Coordination_Dataset(Task_Dataset):

@@ -161,7 +161,7 @@ BATCH_ADAPTERS = {
                                                   seq_len = batch[2], recall_gt_original=batch[3]),
     Tasks.SPATIAL_INTEGRATION: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2], part_size = batch[3]),
     Tasks.SPATIAL_MEMORY_UPDATING: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2], set_size = batch[3]),
-    Tasks.SPATIAL_TASK_SWITCHING: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2]), 
+    Tasks.SPATIAL_TASK_SWITCHING: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2], task_order = batch[3]), 
 
     Tasks.VISUAL_ITEM_RECOGNITION: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2], retention_interval = batch[3], gt_index = batch[4]),
     Tasks.VISUAL_SERIAL_RECALL: lambda batch: dict(img_seq = batch[0], gt = batch[1], seq_len = batch[2], list_length = batch[3]),
