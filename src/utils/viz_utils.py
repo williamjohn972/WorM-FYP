@@ -41,7 +41,8 @@ def viz_results(epoch, detailed_acc, config: Config, task_list):
 
     for task in task_list:
         task_key_prefix = task.value  
-        task_detailed_data = {k: v for k, v in detailed_acc.items() if task_key_prefix in k}
+        # task_detailed_data = {k: v for k, v in detailed_acc.items() if task_key_prefix in k}
+        task_detailed_data = {k: v for k, v in detailed_acc.items() if k.startswith(task_key_prefix + "_")}
 
         if not task_detailed_data:
             continue
